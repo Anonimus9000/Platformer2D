@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public float Health = 100;
     public float MoveSpeed = 10f;
     public float JumpForce = 10f;
     public float Damage = 10f;
     public float AttackSpeed = 0.5f;
 
+    private AttackTrackingPlayer _attackTracking;
     private Rigidbody2D _rigidbody2D;
     private bool _isFacingRight;
     private Animator _animator;
@@ -22,6 +24,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        _attackTracking = GetComponentInChildren<AttackTrackingPlayer>();
         _animator = GetComponent<Animator>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -37,6 +40,13 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         Move();
+    }
+    public void TakeDamage(float damage)
+    {
+        print(Health);
+        print("takeHitPlayer");
+        _animator.SetTrigger("takeHit");
+        Health -= damage;
     }
 
     private void Move()
@@ -68,7 +78,7 @@ public class PlayerController : MonoBehaviour
     {
         if(_rigidbody2D.velocity.y == 0)
             _animator.SetTrigger("idle");
-        else
+        if(_rigidbody2D.velocity.y < 0)
         {
             _animator.SetFloat("yVelocity", _rigidbody2D.velocity.y);
         }
@@ -89,16 +99,15 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetButtonDown("Fire1"))
             {
+                _attackTracking.Attack();
                 _animator.SetTrigger("attack1");
                 _timer = 0;
-                print("fire --------------------------------");
                 _arrayAttacks.Add("Fire1");
                 _timeLastAttack = Time.time;
             }
             if (Input.GetButtonDown("Fire2") && Time.time < _timeLastAttack + _periodAttack && _arrayAttacks.Last() == "Fire1")
             {
                 _arrayAttacks.Add("Fire2");
-                print("fire2");
                 _animator.SetTrigger("attack2");
                 _timer = 0;
                 isLastComboAttack = true;

@@ -11,6 +11,7 @@ public class GoblinController : MonoBehaviour
     public float MoveSpeed = 10f;
     public float RangePotrol = 100f;
 
+    private AttackTrackingGoblin _attackTracking;
     private float _timer = 0;
     private float _nowPositionPotrol;
     private bool _isPotrolRight = true;
@@ -21,6 +22,7 @@ public class GoblinController : MonoBehaviour
 
     void Start()
     {
+        _attackTracking = GetComponentInChildren<AttackTrackingGoblin>();
         _nowPositionPotrol = RangePotrol;
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -39,6 +41,13 @@ public class GoblinController : MonoBehaviour
     {
         EnemyPotrol();
         MoveToObject(_player.gameObject, 4);
+    }
+
+    public void TakeDamage(float damage)
+    {
+        print(Health);
+        _animator.SetTrigger("takeHit");
+        Health -= damage;
     }
 
     private void EnemyPotrol()
@@ -87,7 +96,7 @@ public class GoblinController : MonoBehaviour
         {
             if (Vector2.Distance(obj.transform.position, gameObject.transform.position) < 0.5)
             {
-                print("attack");
+                _attackTracking.Attack();
                 _animator.SetTrigger("attack1");
                 _timer = 0;
             }
