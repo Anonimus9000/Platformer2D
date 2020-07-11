@@ -1,21 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public float MoveSpeed = 10f;
-
-    public float JumpForce = 0.001f;
+    public float JumpForce = 10f;
+    public float Damage = 10f;
+    public float AttackSpeed = 0.5f;
 
     private Rigidbody2D _rigidbody2D;
-
     private bool _isFacingRight;
-
     private Animator _animator;
-
     private SpriteRenderer _spriteRenderer;
-
+    private float _timer = 0;
+    private float _timeLastAttack;
+    private float _periodAttack = 0.6f;
+    private List<string> _arrayAttacks = new List<string>();
+    
 
     void Start()
     {
@@ -27,7 +30,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        _timer += Time.deltaTime;
+        Attack();
     }
 
     void FixedUpdate()
@@ -37,7 +41,6 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        Attack();
         Run();
         Jump();
     }
@@ -74,18 +77,39 @@ public class Player : MonoBehaviour
         {
             if (_rigidbody2D.velocity.y == 0)
             {
-                _rigidbody2D.AddForce(transform.up * JumpForce, ForceMode2D.Impulse);
+                _rigidbody2D.AddForce(transform.up * (JumpForce ), ForceMode2D.Impulse);
             }
         }
     }
 
     private void Attack()
     {
-        if (Input.GetKey(KeyCode.Z))
+        bool isLastComboAttack = false;
+        if (_timer >= 1 / AttackSpeed)
         {
-            print("fire");
-            _animator.SetTrigger("attack1");
+            if (Input.GetButtonDown("Fire1"))
+            {
+                _animator.SetTrigger("attack1");
+                _timer = 0;
+                print("fire --------------------------------");
+                _arrayAttacks.Add("Fire1");
+                _timeLastAttack = Time.time;
+            }
+            if (Input.GetButtonDown("Fire2") && Time.time < _timeLastAttack + _periodAttack && _arrayAttacks.Last() == "Fire1")
+            {
+                _arrayAttacks.Add("Fire2");
+                print("fire2");
+                _animator.SetTrigger("attack2");
+                _timer = 0;
+                isLastComboAttack = true;
+            }
         }
-        _animator.SetTrigger("idle");
+
+        if (isLastComboAttack)
+        {
+            _arrayAttacks.Clear();
+        }
     }
+
+    
 }
