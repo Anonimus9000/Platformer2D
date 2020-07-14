@@ -24,14 +24,12 @@ public class AttackTrackingPlayer : MonoBehaviour
         {
             _goblin = trigger.GetComponent<GoblinController>();
         }
-        else
-            _goblin = null;
-
     }
 
     public void Attack()
     {
         if(_goblin != null)
             _goblin.TakeDamage(_player.Damage);
+        _goblin = null;
     }
 }

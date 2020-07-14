@@ -24,8 +24,6 @@ public class AttackTrackingGoblin : MonoBehaviour
         {
             _player = trigger.GetComponent<PlayerController>();
         }
-        else
-            _player = null;
     }
     public void Attack()
     {

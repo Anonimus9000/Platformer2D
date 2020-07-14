@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -16,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private bool _isFacingRight;
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
+    private AttackTrackingPlayer _punchController;
     private float _timer = 0;
     private float _timeLastAttack;
     private float _periodAttack = 0.6f;
@@ -28,6 +31,7 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _punchController = GetComponentInChildren<AttackTrackingPlayer>();
     }
 
     // Update is called once per frame
@@ -43,8 +47,6 @@ public class PlayerController : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
-        print(Health);
-        print("takeHitPlayer");
         _animator.SetTrigger("takeHit");
         Health -= damage;
     }
@@ -65,6 +67,21 @@ public class PlayerController : MonoBehaviour
             _rigidbody2D.velocity = new Vector2(move * MoveSpeed, _rigidbody2D.velocity.y);
 
             _spriteRenderer.flipX = _rigidbody2D.velocity.x < 0.0f;
+
+            if (_spriteRenderer.flipX == true)
+            {
+                Vector2 vect2 = _punchController.transform.position;
+                vect2.x *= -1;
+                _punchController.transform.position = vect2;
+            }
+            else if(_spriteRenderer.flipX == false)
+            {
+                Vector2 vect2 = _punchController.transform.position;
+                vect2.x = Math.Abs(vect2.x);
+                _punchController.transform.position = vect2;
+            }
+                
+               
         }
         else
         {
