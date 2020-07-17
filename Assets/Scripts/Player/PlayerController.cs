@@ -68,20 +68,6 @@ public class PlayerController : MonoBehaviour
 
             _spriteRenderer.flipX = _rigidbody2D.velocity.x < 0.0f;
 
-            if (_spriteRenderer.flipX == true)
-            {
-                Vector2 vect2 = _punchController.transform.position;
-                vect2.x *= -1;
-                _punchController.transform.position = vect2;
-            }
-            else if(_spriteRenderer.flipX == false)
-            {
-                Vector2 vect2 = _punchController.transform.position;
-                vect2.x = Math.Abs(vect2.x);
-                _punchController.transform.position = vect2;
-            }
-                
-               
         }
         else
         {

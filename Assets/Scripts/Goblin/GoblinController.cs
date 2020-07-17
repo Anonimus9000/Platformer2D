@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class GoblinController : MonoBehaviour
+using Assets.Scripts.Interfaces;
+public class GoblinController : MonoBehaviour, IEnemy
 {
     public float Damage;
     public float Health;
