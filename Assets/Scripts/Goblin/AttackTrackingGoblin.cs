@@ -20,7 +20,7 @@ public class AttackTrackingGoblin : MonoBehaviour
     {
         if (_spriteRendererGoblin.flipX == true)
         {
-            _circleCollider.offset = new Vector2(-0.44f, 0);
+            _circleCollider.offset = new Vector2(-(_circleCollider.radius * 2), 0);
         }
         else if (_spriteRendererGoblin.flipX == false)
         {

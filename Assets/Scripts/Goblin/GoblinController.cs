@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEditor;
 using UnityEngine;
 
@@ -17,10 +18,12 @@ public class GoblinController : MonoBehaviour, IEnemy
     private float _timer = 0;
     private float _nowPositionPotrol;
     private bool _isPotrolRight = true;
+    private bool _isDead = false;
     private Rigidbody2D _rigidbody2D;
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
     private PlayerController _player;
+    private CapsuleCollider2D _capsuleCollider2D;
     
 
     void Start()
@@ -31,12 +34,14 @@ public class GoblinController : MonoBehaviour, IEnemy
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
         _player = FindObjectOfType<PlayerController>();
-        
+        _capsuleCollider2D = GetComponent<CapsuleCollider2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(_isDead)
+            Kill();
         _timer += Time.deltaTime;
         Attack(_player.gameObject);
     }
@@ -58,6 +63,9 @@ public class GoblinController : MonoBehaviour, IEnemy
             gameObject.transform.position = new Vector3(gameObject.transform.position.x + 0.3f, gameObject.transform.position.y);
         else
             gameObject.transform.position = new Vector3(gameObject.transform.position.x - 0.3f, gameObject.transform.position.y);
+        if (Health <= 0)
+            _isDead = true;
+
     }
 
     private void EnemyPotrol()
@@ -110,4 +118,14 @@ public class GoblinController : MonoBehaviour, IEnemy
             }
         }
     }
+
+    private void Kill()
+    {
+        Destroy(_rigidbody2D); 
+        Destroy(_capsuleCollider2D); 
+        _animator.SetTrigger("death");
+        Destroy(gameObject, 8);
+        
+    }
+
 }
