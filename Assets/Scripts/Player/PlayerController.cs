@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class PlayerController : MonoBehaviour
 {
@@ -38,6 +39,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         _timer += Time.deltaTime;
+        if (Health <= 0)
+            Kill();
         Attack();
     }
 
@@ -134,6 +137,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
+    private void Kill()
+    {
+        _animator.SetTrigger("death");
+        Destroy(_attackTracking);
+    }
 
 }
