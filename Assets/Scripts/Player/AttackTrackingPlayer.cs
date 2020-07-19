@@ -61,7 +61,6 @@ public class AttackTrackingPlayer : MonoBehaviour
         if (_spriteRendererPlayer.flipX == true)
         {
             
-            print("_spriteRendererPlayer.flipX == true");
             var posX = gameObject.transform.position.x;
             var trackPosition = new Vector3(posX - (_circleCollider.radius * 2), gameObject.transform.position.y, gameObject.transform.position.z);
             enemiesToDamage =
@@ -69,7 +68,6 @@ public class AttackTrackingPlayer : MonoBehaviour
         }
         else
         {
-            print("_spriteRendererPlayer.flipX == false");
             enemiesToDamage =
                 Physics2D.OverlapCircleAll(gameObject.transform.position, _circleCollider.radius, _layerMask);
         }

@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         Run();
+        
         Jump();
     }
 
@@ -79,7 +80,8 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        if(_rigidbody2D.velocity.y == 0)
+        print(_rigidbody2D.velocity.y);
+        if (_rigidbody2D.velocity.y == 0)
             _animator.SetTrigger("idle");
         if(_rigidbody2D.velocity.y < 0)
         {
@@ -89,9 +91,9 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButton("Jump"))
         {
             if (_rigidbody2D.velocity.y == 0)
-            {
                 _rigidbody2D.AddForce(transform.up * (JumpForce ), ForceMode2D.Impulse);
-            }
+
+            _animator.SetFloat("yVelocity", _rigidbody2D.velocity.y);
         }
     }
 

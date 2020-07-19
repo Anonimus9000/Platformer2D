@@ -12,6 +12,7 @@ public class GoblinController : MonoBehaviour, IEnemy
     public float AttackSpeed = 2;
     public float MoveSpeed = 10f;
     public float RangePotrol = 100f;
+    public float ForceOfDeathImpulse = 1f;
     public bool Potrol = true;
 
     private AttackTrackingGoblin _attackTracking;
@@ -42,8 +43,10 @@ public class GoblinController : MonoBehaviour, IEnemy
     {
         if(_isDead)
             Kill();
+        else
+            Attack(_player.gameObject);
+        
         _timer += Time.deltaTime;
-        Attack(_player.gameObject);
     }
 
     void FixedUpdate()
@@ -55,17 +58,14 @@ public class GoblinController : MonoBehaviour, IEnemy
 
     public void TakeDamage(float damage)
     {
-        print("Goblin take hit");
         _animator.SetTrigger("takeHit");
         Health -= damage;
-        print("goblin take back");
         if (_spriteRenderer.flipX)
             gameObject.transform.position = new Vector3(gameObject.transform.position.x + 0.3f, gameObject.transform.position.y);
         else
             gameObject.transform.position = new Vector3(gameObject.transform.position.x - 0.3f, gameObject.transform.position.y);
         if (Health <= 0)
             _isDead = true;
-
     }
 
     private void EnemyPotrol()
@@ -121,11 +121,13 @@ public class GoblinController : MonoBehaviour, IEnemy
 
     private void Kill()
     {
-        Destroy(_rigidbody2D); 
-        Destroy(_capsuleCollider2D); 
         _animator.SetTrigger("death");
+        Destroy(_rigidbody2D);
+        Destroy(_capsuleCollider2D);
+        Destroy(GetComponent<BoxCollider2D>());
+        Destroy(_attackTracking);
         Destroy(gameObject, 8);
-        
+
     }
 
 }
