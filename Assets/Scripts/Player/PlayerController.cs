@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
     private float _timer = 0;
+    private bool _isDead = false;
     private ComboAttacks _comboAttacks = ComboAttacks.Attack1;
     private enum ComboAttacks
     {
@@ -46,7 +47,8 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Move();
+        if(!_isDead)
+            Move();
     }
     public void TakeDamage(float damage)
     {
@@ -139,6 +141,7 @@ public class PlayerController : MonoBehaviour
 
     private void Kill()
     {
+        _isDead = true;
         _animator.SetTrigger("death");
         Destroy(_attackTracking);
     }
