@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class BossHealthBarController : MonoBehaviour
 {
     public AbstructBoss Boss;
-    public Image _backGrondImage;
+    public Image BackGrondImage;
+    public Image FrontImage;
 
     private float _maxHealth;
     private float _nowHealth;
@@ -20,10 +21,26 @@ public class BossHealthBarController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Boss.Health <= _minHealth)
+        {
+            BackGrondImage.fillAmount = 0;
+            return;
+        }
+
         if (_nowHealth != Boss.Health)
         {
             _nowHealth = Boss.Health;
-            _backGrondImage.fillAmount = _nowHealth / 100;
+            BackGrondImage.fillAmount = _nowHealth / 100;
         }
+    }
+
+    void FixedUpdate()
+    {
+        if (Boss.IsSeePlayer())
+        {
+            Instantiate(BackGrondImage);
+            Instantiate(FrontImage);
+        }
+
     }
 }

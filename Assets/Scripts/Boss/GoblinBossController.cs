@@ -4,8 +4,8 @@ using Assets.Scripts;
 using UnityEngine;
 
 public class GoblinBossController : AbstructBoss
-{
-   
+{ 
+    private bool _isSeePlayer = false;
     private float _timer;
     private bool _isDead = false;
     private AttackTrackingBossGoblin _attackTracking;
@@ -30,7 +30,7 @@ public class GoblinBossController : AbstructBoss
     {
         if (_isDead)
             Kill();
-        else
+        else if(!_player.IsDead())
             Attack(_player.gameObject);
 
         _timer += Time.deltaTime;
@@ -38,7 +38,8 @@ public class GoblinBossController : AbstructBoss
 
     void FixedUpdate()
     {
-        MoveToObject(_player.gameObject, 4);
+        if(!_player.IsDead())
+            MoveToObject(_player.gameObject, 4);
     }
     public void TakeDamage(float damage)
     {
@@ -47,16 +48,35 @@ public class GoblinBossController : AbstructBoss
         if (Health <= 0)
             _isDead = true;
     }
+    public override void Kill()
+    {
+        _isSeePlayer = false;
+        _animator.SetTrigger("death");
+        Destroy(_rigidbody2D);
+        Destroy(_capsuleCollider2D);
+        Destroy(GetComponent<BoxCollider2D>());
+        Destroy(_attackTracking);
+        Destroy(gameObject, 8);
+    }
+
+    public override bool IsSeePlayer()
+    {
+        return _isSeePlayer;
+    }
 
     private void MoveToObject(GameObject obj, int distance)
     {
         if (Vector2.Distance(obj.transform.position, gameObject.transform.position) < distance)
         {
+            _isSeePlayer = true;
+
             _animator.SetFloat("speed", MoveSpeed);
+
             if (obj.transform.position.x < gameObject.transform.position.x)
                 _rigidbody2D.velocity = new Vector2(-MoveSpeed, _rigidbody2D.velocity.y);
             if (obj.transform.position.x > gameObject.transform.position.x)
                 _rigidbody2D.velocity = new Vector2(MoveSpeed, _rigidbody2D.velocity.y);
+
             _spriteRenderer.flipX = _rigidbody2D.velocity.x < 0.0f;
         }
     }
@@ -73,13 +93,5 @@ public class GoblinBossController : AbstructBoss
             }
         }
     }
-    public override void Kill()
-    {
-        _animator.SetTrigger("death");
-        Destroy(_rigidbody2D);
-        Destroy(_capsuleCollider2D);
-        Destroy(GetComponent<BoxCollider2D>());
-        Destroy(_attackTracking);
-        Destroy(gameObject, 8);
-    }
+    
 }

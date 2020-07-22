@@ -20,4 +20,6 @@ public abstract class AbstructBoss : MonoBehaviour, IEnemy
         Destroy(gameObject);
     }
 
+    public abstract bool IsSeePlayer();
+
 }

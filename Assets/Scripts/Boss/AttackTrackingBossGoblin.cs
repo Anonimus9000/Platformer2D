@@ -12,7 +12,7 @@ public class AttackTrackingBossGoblin : MonoBehaviour
     {
         _goblinBoss = GetComponent<GoblinBossController>();
         _spriteRendererGoblin = GetComponentInParent<SpriteRenderer>();
-        _circleCollider = GetComponent<CircleCollider2D>();
+        _circleCollider = GetComponentInChildren<CircleCollider2D>();
     }
 
     // Update is called once per frame

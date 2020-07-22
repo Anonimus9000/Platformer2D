@@ -15,6 +15,7 @@ public class GoblinController : MonoBehaviour, IEnemy
     public float ForceOfDeathImpulse = 1f;
     public bool Potrol = true;
 
+    private bool _isSeePlayer = false;
     private AttackTrackingGoblin _attackTracking;
     private float _timer = 0;
     private float _nowPositionPotrol;
@@ -43,7 +44,7 @@ public class GoblinController : MonoBehaviour, IEnemy
     {
         if(_isDead)
             Kill();
-        else
+        else if(_isSeePlayer)
             Attack(_player.gameObject);
         
         _timer += Time.deltaTime;
@@ -53,7 +54,8 @@ public class GoblinController : MonoBehaviour, IEnemy
     {
         if(Potrol)
             EnemyPotrol();
-        MoveToObject(_player.gameObject, 4);
+        if(!_player.IsDead())
+            MoveToObject(_player.gameObject, 4);
     }
 
     public void TakeDamage(float damage)
@@ -93,11 +95,14 @@ public class GoblinController : MonoBehaviour, IEnemy
     {
         if (Vector2.Distance(obj.transform.position, gameObject.transform.position) < distance)
         {
+            _isSeePlayer = true;
             _animator.SetFloat("speed", MoveSpeed);
+
             if (obj.transform.position.x < gameObject.transform.position.x)
                 _rigidbody2D.velocity = new Vector2(-MoveSpeed, _rigidbody2D.velocity.y);
             if (obj.transform.position.x > gameObject.transform.position.x)
                 _rigidbody2D.velocity = new Vector2(MoveSpeed, _rigidbody2D.velocity.y);
+
             _spriteRenderer.flipX = _rigidbody2D.velocity.x < 0.0f;
         }
     }

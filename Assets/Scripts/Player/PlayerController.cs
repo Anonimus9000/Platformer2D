@@ -56,6 +56,11 @@ public class PlayerController : MonoBehaviour
         Health -= damage;
     }
 
+    public bool IsDead()
+    {
+        return _isDead;
+    }
+
     private void Move()
     {
         Run();
@@ -85,7 +90,6 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        print(_rigidbody2D.velocity.y);
         if (_rigidbody2D.velocity.y == 0)
             _animator.SetTrigger("idle");
         if(_rigidbody2D.velocity.y < 0)
