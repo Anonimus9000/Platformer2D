@@ -10,12 +10,13 @@ public class DialogManager : MonoBehaviour
     public bool PlayerTalkFirst;
 
     private bool _nowPlayerTalk;
-    private Text _dialogText;
-    private Queue<string> sensences;
+    private Queue<string> sensencesPlayer;
+    private Queue<string> sensencesEnemy;
     void Start()
     {
         _nowPlayerTalk = PlayerTalkFirst;
-        sensences = new Queue<string>();
+        sensencesPlayer = new Queue<string>();
+        sensencesEnemy = new Queue<string>();
     }
 
     // Update is called once per frame
@@ -27,11 +28,16 @@ public class DialogManager : MonoBehaviour
 
     public void StartDialog(Dialog dialog)
     {
-        sensences.Clear();
+        sensencesPlayer.Clear();
 
         foreach (string sensence in dialog.sentencesPlayer)
         {
-            sensences.Enqueue(sensence);
+            sensencesPlayer.Enqueue(sensence);
+        }
+
+        foreach (string sensence in dialog.sentencesEnemy)
+        {
+            sensencesEnemy.Enqueue(sensence);
         }
 
         DisplayNextSentence();
@@ -39,27 +45,55 @@ public class DialogManager : MonoBehaviour
 
     private void DisplayNextSentence()
     {
-        if (sensences.Count == 0)
+        if (sensencesPlayer.Count == 0)
         {
             EndDialog();
             return;
         }
 
-        string sentence = sensences.Dequeue();
+        string sentence;
+
+        if (_nowPlayerTalk)
+            sentence = sensencesPlayer.Dequeue();
+        
+        else
+            sentence = sensencesEnemy.Dequeue();
+        
         StartCoroutine(TypeSentence(sentence));
     }
 
     IEnumerator TypeSentence(string sentence)
     {
-        _dialogText.text += "";
-        foreach (var letter in sentence.ToCharArray())
+        if (_nowPlayerTalk)
         {
-            if (_nowPlayerTalk)
-                PlayerText.text += letter;
-            else
-                AnyCharText.text += letter;
-            yield return null;
+            PlayerText.text = "";
+            _nowPlayerTalk = !_nowPlayerTalk;
+
+            foreach (var letter in sentence.ToCharArray())
+            {
+                if (_nowPlayerTalk)
+                    PlayerText.text += letter;
+                else
+                    AnyCharText.text += letter;
+                yield return null;
+            }
         }
+
+        else if (!_nowPlayerTalk)
+        {
+            AnyCharText.text = "";
+            _nowPlayerTalk = !_nowPlayerTalk;
+
+            foreach (var letter in sentence.ToCharArray())
+            {
+                if (_nowPlayerTalk)
+                    PlayerText.text += letter;
+                else
+                    AnyCharText.text += letter;
+                yield return null;
+            }
+        }
+
     }
 
     private void EndDialog()

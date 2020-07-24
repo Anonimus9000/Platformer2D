@@ -3,18 +3,10 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEditor;
 using UnityEngine;
-
 using Assets.Scripts.Interfaces;
-public class GoblinController : MonoBehaviour, IEnemy
-{
-    public float Damage;
-    public float Health;
-    public float AttackSpeed = 2;
-    public float MoveSpeed = 10f;
-    public float RangePotrol = 100f;
-    public float ForceOfDeathImpulse = 1f;
-    public bool Potrol = true;
 
+public class GoblinController : EnemyMob
+{
     private bool _isSeePlayer = false;
     private AttackTrackingGoblin _attackTracking;
     private float _timer = 0;
@@ -26,7 +18,7 @@ public class GoblinController : MonoBehaviour, IEnemy
     private Animator _animator;
     private PlayerController _player;
     private CapsuleCollider2D _capsuleCollider2D;
-    
+
 
     void Start()
     {
@@ -42,22 +34,35 @@ public class GoblinController : MonoBehaviour, IEnemy
     // Update is called once per frame
     void Update()
     {
-        if(_isDead)
+        if (_isDead)
             Kill();
-        else if(_isSeePlayer)
+        else if (_isSeePlayer)
             Attack(_player.gameObject);
-        
+
         _timer += Time.deltaTime;
     }
 
     void FixedUpdate()
     {
-        if(Potrol)
+        if (Potrol)
             EnemyPotrol();
-        if(!_player.IsDead())
-            MoveToObject(_player.gameObject, 4);
+        if (!_player.IsDead())
+        {
+        }
+
+        MoveToObject(_player.gameObject, 4);
     }
 
+    public override void MoveToPosition(Vector3 position)
+    {
+        _animator.SetFloat("speed", MoveSpeed);
+        if (position.x + 0.1f < gameObject.transform.position.x)
+            _rigidbody2D.velocity = new Vector2(-MoveSpeed, _rigidbody2D.velocity.y);
+        if (position.x + 0.1f > gameObject.transform.position.x)
+            _rigidbody2D.velocity = new Vector2(MoveSpeed, _rigidbody2D.velocity.y);
+
+        _spriteRenderer.flipX = _rigidbody2D.velocity.x < 0.0f;
+    }
     public void TakeDamage(float damage)
     {
         _animator.SetTrigger("takeHit");
@@ -65,6 +70,17 @@ public class GoblinController : MonoBehaviour, IEnemy
         if (Health <= 0)
             _isDead = true;
     }
+
+    public override void Kill()
+    {
+        _animator.SetTrigger("death");
+        Destroy(_rigidbody2D);
+        Destroy(_capsuleCollider2D);
+        Destroy(GetComponent<BoxCollider2D>());
+        Destroy(_attackTracking);
+        Destroy(gameObject, 8);
+    }
+
 
     private void EnemyPotrol()
     {
@@ -107,6 +123,7 @@ public class GoblinController : MonoBehaviour, IEnemy
         }
     }
 
+
     private void Attack(GameObject obj)
     {
         if (_timer >= 1 / AttackSpeed)
@@ -119,16 +136,4 @@ public class GoblinController : MonoBehaviour, IEnemy
             }
         }
     }
-
-    private void Kill()
-    {
-        _animator.SetTrigger("death");
-        Destroy(_rigidbody2D);
-        Destroy(_capsuleCollider2D);
-        Destroy(GetComponent<BoxCollider2D>());
-        Destroy(_attackTracking);
-        Destroy(gameObject, 8);
-
-    }
-
 }

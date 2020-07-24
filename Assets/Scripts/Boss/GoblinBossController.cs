@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Assets.Scripts;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GoblinBossController : AbstructBoss
 { 
@@ -39,9 +36,9 @@ public class GoblinBossController : AbstructBoss
     void FixedUpdate()
     {
         if(!_player.IsDead())
-            MoveToObject(_player.gameObject, 4);
+            MoveToObject(_player.gameObject, 1);
     }
-    public void TakeDamage(float damage)
+    public override void TakeDamage(float damage)
     {
         _animator.SetTrigger("takeHit");
         Health -= damage;
