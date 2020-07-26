@@ -62,7 +62,6 @@ public class AttackTrackingPlayer : MonoBehaviour
             enemiesToDamage =
                 Physics2D.OverlapCircleAll(gameObject.transform.position, _circleCollider.radius, _layerMask);
         }
-        print(gameObject.transform.position.x);
 
         for (int i = 0; i < enemiesToDamage.Length; i++)
         {

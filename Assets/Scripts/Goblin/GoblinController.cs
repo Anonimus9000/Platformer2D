@@ -117,7 +117,6 @@ public class GoblinController : EnemyMob
     public override void StopStand()
     {
         MoveSpeed = _moveSpeed;
-        print(MoveSpeed);
         _animator.SetFloat("speed", MoveSpeed);
     }
 

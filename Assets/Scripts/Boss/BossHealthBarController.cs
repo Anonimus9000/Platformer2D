@@ -12,8 +12,10 @@ public class BossHealthBarController : MonoBehaviour
     private float _maxHealth;
     private float _nowHealth;
     private float _minHealth = 0;
+    private bool _healthbarIsCreat = false;
     void Start()
     {
+        gameObject.SetActive(false);
         _maxHealth = Boss.Health;
         _nowHealth = Boss.Health;
     }
@@ -36,11 +38,12 @@ public class BossHealthBarController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Boss.IsSeePlayer())
+        if (Boss.IsSeePlayer() && _healthbarIsCreat == false)
         {
+            gameObject.SetActive(true);
+            _healthbarIsCreat = true;
             Instantiate(BackGrondImage);
             Instantiate(FrontImage);
         }
-
     }
 }

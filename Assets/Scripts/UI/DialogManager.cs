@@ -68,12 +68,12 @@ public class DialogManager : MonoBehaviour
             return;
         }
 
-        string sentence;
+        string sentence = "";
 
-        if (_nowPlayerTalk)
+        if (_nowPlayerTalk && sensencesPlayer.Count != 0)
             sentence = sensencesPlayer.Dequeue();
         
-        else
+        else if(sensencesEnemy.Count != 0)
             sentence = sensencesEnemy.Dequeue();
         
         StartCoroutine(TypeSentence(sentence));
@@ -112,7 +112,6 @@ public class DialogManager : MonoBehaviour
 
     private void EndDialog()
     {
-        print("Dialog end");
         _dialogIsEnd = true;
         PlayerText.text = "";
         AnyCharText.text = "";
