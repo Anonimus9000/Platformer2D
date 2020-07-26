@@ -10,8 +10,7 @@ public class HealthbarController : MonoBehaviour
 
     private float _maxHealth;
     private float _nowHealth;
-    private float _minHealth = 0;
-    
+
     void Start()
     {
         _maxHealth = Player.Health;

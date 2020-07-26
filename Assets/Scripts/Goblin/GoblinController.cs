@@ -7,6 +7,7 @@ using Assets.Scripts.Interfaces;
 
 public class GoblinController : EnemyMob
 {
+    private bool _isDead = false;
     private bool _isSeePlayer = false;
     private AttackTrackingGoblin _attackTracking;
     private float _timer = 0;
@@ -36,9 +37,13 @@ public class GoblinController : EnemyMob
 
     void Update()
     {
-        if (Health <= 0)
+        if (Health <= 0 && !_isDead)
+        {
+            _isDead = true;
             Kill();
-        else if (_isSeePlayer)
+        }
+            
+        if (_isSeePlayer && !_isDead)
             Attack(_player.gameObject);
 
         _timer += Time.deltaTime;
@@ -55,7 +60,7 @@ public class GoblinController : EnemyMob
             }
 
             if (MoveSpeed != 0)
-                MoveToObject(_player.gameObject, 4);
+                MoveToObject(_player.gameObject);
         }
     }
 
@@ -91,7 +96,7 @@ public class GoblinController : EnemyMob
 
         _spriteRenderer.flipX = _rigidbody2D.velocity.x < 0.0f;
     }
-    public void TakeDamage(float damage)
+    public override void TakeDamage(float damage)
     {
         _animator.SetTrigger("takeHit");
         Health -= damage;
@@ -120,6 +125,11 @@ public class GoblinController : EnemyMob
         _animator.SetFloat("speed", MoveSpeed);
     }
 
+    public bool Isdead()
+    {
+        return _isDead;
+    }
+
     private void EnemyPotrol()
     {
         _animator.SetFloat("speed", MoveSpeed);
@@ -144,10 +154,10 @@ public class GoblinController : EnemyMob
                 _isPotrolRight = true;
         }
     }
-
-    private void MoveToObject(GameObject obj, int distance)
+    
+    private void MoveToObject(GameObject obj)
     {
-        if (Vector2.Distance(obj.transform.position, gameObject.transform.position) < distance)
+        if (Vector2.Distance(obj.transform.position, gameObject.transform.position) < RangeVision)
         {
             _isSeePlayer = true;
             _animator.SetFloat("speed", MoveSpeed);

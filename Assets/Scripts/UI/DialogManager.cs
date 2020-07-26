@@ -9,6 +9,7 @@ public class DialogManager : MonoBehaviour
     public Text AnyCharText;
     public Text TabToNextText;
 
+    private bool _isEndPrintText;
     private bool _nowPlayerTalk;
     private bool _dialogIsEnd = true;
     private Queue<string> sensencesPlayer;
@@ -23,7 +24,7 @@ public class DialogManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Submit"))
+        if (Input.GetButtonDown("Submit") && _isEndPrintText)
             DisplayNextSentence();
     }
 
@@ -70,10 +71,10 @@ public class DialogManager : MonoBehaviour
 
         string sentence = "";
 
-        if (_nowPlayerTalk && sensencesPlayer.Count != 0)
+        if (_nowPlayerTalk)
             sentence = sensencesPlayer.Dequeue();
         
-        else if(sensencesEnemy.Count != 0)
+        else 
             sentence = sensencesEnemy.Dequeue();
         
         StartCoroutine(TypeSentence(sentence));
@@ -81,6 +82,7 @@ public class DialogManager : MonoBehaviour
 
     IEnumerator TypeSentence(string sentence)
     {
+        _isEndPrintText = false;
         if (_nowPlayerTalk)
         {
             PlayerText.text = "";
@@ -108,10 +110,12 @@ public class DialogManager : MonoBehaviour
             _nowPlayerTalk = !_nowPlayerTalk;
         }
 
+        _isEndPrintText = true;
     }
 
     private void EndDialog()
     {
+        print("Dialog is end");
         _dialogIsEnd = true;
         PlayerText.text = "";
         AnyCharText.text = "";

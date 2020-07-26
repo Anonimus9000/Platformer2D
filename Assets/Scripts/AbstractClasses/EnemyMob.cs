@@ -7,6 +7,7 @@ public abstract class EnemyMob : MonoBehaviour, IEnemy
     public float Health;
     public float AttackSpeed = 2;
     public float MoveSpeed = 1f;
+    public float RangeVision = 4;
     public float RangePotrol = 100f;
     public bool Potrol = true;
 
