@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 
 public class GoblinBossController : AbstructBoss
-{ 
+{
+    private float _moveSpeed;
     private bool _isSeePlayer = false;
     private float _timer;
     private bool _isDead = false;
@@ -12,6 +13,10 @@ public class GoblinBossController : AbstructBoss
     private PlayerController _player;
     private CapsuleCollider2D _capsuleCollider2D;
 
+    void Awake()
+    {
+        _moveSpeed = MoveSpeed;
+    }
     void Start()
     {
         _attackTracking = GetComponentInChildren<AttackTrackingBossGoblin>();
@@ -38,6 +43,26 @@ public class GoblinBossController : AbstructBoss
         if(!_player.IsDead())
             MoveToObject(_player.gameObject, 1);
     }
+
+    public override void LookRight()
+    {
+        _spriteRenderer.flipX = false;
+    }
+
+    public override void LookLeft()
+    {
+        _spriteRenderer.flipX = true;
+    }
+
+    public override void StartStand()
+    {
+        MoveSpeed = 0;
+    }
+    public override void StopStand()
+    {
+        MoveSpeed = _moveSpeed;
+    }
+
     public override void TakeDamage(float damage)
     {
         _animator.SetTrigger("takeHit");

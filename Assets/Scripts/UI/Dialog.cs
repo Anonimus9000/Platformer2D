@@ -7,7 +7,7 @@ public class Dialog
 {
     
     [TextArea(3, 10)]
-    public string[] sentencesPlayer;
+    public string[] SentencesPlayer;
     [TextArea(3, 10)]
-    public string[] sentencesEnemy;
+    public string[] SentencesEnemy;
 }

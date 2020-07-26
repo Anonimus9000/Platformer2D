@@ -1,23 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Assets.Scripts.Interfaces;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class DialogTrigger : MonoBehaviour
+public class DialogBossTrigger : MonoBehaviour
 {
     public bool PlayerTalkFirst = true;
-    public EnemyMob ObjectToTalk;
+    public AbstructBoss ObjectToTalk;
     public Dialog Dialog;
-    
+
     private BoxCollider2D _boxCollider;
     private PlayerController _player;
     private DialogManager _dialogManager;
-
     void Start()
     {
         _dialogManager = FindObjectOfType<DialogManager>();
         ObjectToTalk.StartStand();
     }
+
+    // Update is called once per frame
     void FixedUpdate()
     {
         if (_player != null)
@@ -38,6 +36,7 @@ public class DialogTrigger : MonoBehaviour
             }
         }
     }
+
     private void TriggerDialog()
     {
         _dialogManager.StartDialog(Dialog, PlayerTalkFirst);
@@ -58,5 +57,4 @@ public class DialogTrigger : MonoBehaviour
             _player = null;
         }
     }
-
 }

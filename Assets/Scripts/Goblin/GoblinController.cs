@@ -10,16 +10,19 @@ public class GoblinController : EnemyMob
     private bool _isSeePlayer = false;
     private AttackTrackingGoblin _attackTracking;
     private float _timer = 0;
+    private float _moveSpeed;
     private float _nowPositionPotrol;
-    private bool _isPotrolRight = true;
-    private bool _isDead = false;
+    private bool _isPotrolRight = false;
     private Rigidbody2D _rigidbody2D;
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
     private PlayerController _player;
     private CapsuleCollider2D _capsuleCollider2D;
 
-
+    void Awake()
+    {
+        _moveSpeed = MoveSpeed;
+    }
     void Start()
     {
         _attackTracking = GetComponentInChildren<AttackTrackingGoblin>();
@@ -31,10 +34,9 @@ public class GoblinController : EnemyMob
         _capsuleCollider2D = GetComponent<CapsuleCollider2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (_isDead)
+        if (Health <= 0)
             Kill();
         else if (_isSeePlayer)
             Attack(_player.gameObject);
@@ -44,21 +46,47 @@ public class GoblinController : EnemyMob
 
     void FixedUpdate()
     {
-        if (Potrol)
-            EnemyPotrol();
-        if (!_player.IsDead())
+        if (Health > 0)
         {
-        }
+            if (Potrol)
+                EnemyPotrol();
+            if (!_player.IsDead())
+            {
+            }
 
-        MoveToObject(_player.gameObject, 4);
+            if (MoveSpeed != 0)
+                MoveToObject(_player.gameObject, 4);
+        }
+    }
+
+    public override void LookLeft()
+    {
+        _spriteRenderer.flipX = true;
+    }
+
+    public override void LookRight()
+    {
+        _spriteRenderer.flipX = false;
     }
 
     public override void MoveToPosition(Vector3 position)
     {
         _animator.SetFloat("speed", MoveSpeed);
-        if (position.x + 0.1f < gameObject.transform.position.x)
+
+        if (position.x + 0.2f < gameObject.transform.position.x)
             _rigidbody2D.velocity = new Vector2(-MoveSpeed, _rigidbody2D.velocity.y);
-        if (position.x + 0.1f > gameObject.transform.position.x)
+        if (position.x + 0.2f > gameObject.transform.position.x)
+            _rigidbody2D.velocity = new Vector2(MoveSpeed, _rigidbody2D.velocity.y);
+
+        _spriteRenderer.flipX = _rigidbody2D.velocity.x < 0.0f;
+    }
+    public override void MoveToPosition(float xPosition)
+    {
+        _animator.SetFloat("speed", MoveSpeed);
+
+        if (xPosition + 0.2f < gameObject.transform.position.x)
+            _rigidbody2D.velocity = new Vector2(-MoveSpeed, _rigidbody2D.velocity.y);
+        if (xPosition + 0.2f > gameObject.transform.position.x)
             _rigidbody2D.velocity = new Vector2(MoveSpeed, _rigidbody2D.velocity.y);
 
         _spriteRenderer.flipX = _rigidbody2D.velocity.x < 0.0f;
@@ -67,8 +95,6 @@ public class GoblinController : EnemyMob
     {
         _animator.SetTrigger("takeHit");
         Health -= damage;
-        if (Health <= 0)
-            _isDead = true;
     }
 
     public override void Kill()
@@ -81,6 +107,19 @@ public class GoblinController : EnemyMob
         Destroy(gameObject, 8);
     }
 
+    public override void StartStand()
+    {
+        MoveSpeed = 0;
+
+        if(_animator != null)
+            _animator.SetTrigger("idle");
+    }
+    public override void StopStand()
+    {
+        MoveSpeed = _moveSpeed;
+        print(MoveSpeed);
+        _animator.SetFloat("speed", MoveSpeed);
+    }
 
     private void EnemyPotrol()
     {

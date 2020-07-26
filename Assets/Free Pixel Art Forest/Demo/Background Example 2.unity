@@ -428,8 +428,82 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &103100503
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1726783490309788176, guid: 9e6664dea91543f4a8b93c8a53dbecb2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 1726783490309788176, guid: 9e6664dea91543f4a8b93c8a53dbecb2,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 1726783490309788176, guid: 9e6664dea91543f4a8b93c8a53dbecb2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.1796875
+      objectReference: {fileID: 0}
+    - target: {fileID: 1726783490309788176, guid: 9e6664dea91543f4a8b93c8a53dbecb2,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1726783490309788176, guid: 9e6664dea91543f4a8b93c8a53dbecb2,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1726783490309788176, guid: 9e6664dea91543f4a8b93c8a53dbecb2,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1726783490309788176, guid: 9e6664dea91543f4a8b93c8a53dbecb2,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1726783490309788176, guid: 9e6664dea91543f4a8b93c8a53dbecb2,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1726783490309788176, guid: 9e6664dea91543f4a8b93c8a53dbecb2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1726783490309788176, guid: 9e6664dea91543f4a8b93c8a53dbecb2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1726783490309788176, guid: 9e6664dea91543f4a8b93c8a53dbecb2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1726783490309788179, guid: 9e6664dea91543f4a8b93c8a53dbecb2,
+        type: 3}
+      propertyPath: m_Name
+      value: GoblinBoss
+      objectReference: {fileID: 0}
+    - target: {fileID: 3087581504089382300, guid: 9e6664dea91543f4a8b93c8a53dbecb2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9e6664dea91543f4a8b93c8a53dbecb2, type: 3}
 --- !u!1 &109564379
 GameObject:
   m_ObjectHideFlags: 0
@@ -1920,6 +1994,104 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &592413348
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 592413349}
+  - component: {fileID: 592413351}
+  - component: {fileID: 592413350}
+  m_Layer: 0
+  m_Name: TriggerDialogWithBossGoblin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &592413349
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592413348}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 24, y: -1.16, z: -1.6661915}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &592413350
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592413348}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.53599}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.2693702, y: 1.859412}
+  m_EdgeRadius: 0
+--- !u!114 &592413351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592413348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ce96c50b66d4bb4cb7abbde39f18d8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerTalkFirst: 1
+  ObjectToTalk: {fileID: 1755252491}
+  Dialog:
+    SentencesPlayer:
+    - "...\u042F \u0434\u0443\u043C\u0430\u043B, \u0447\u0442\u043E \u0442\u044B
+      \u0431\u0443\u0434\u0435\u0448\u044C \u0432 \u043A\u0430\u043A\u043E\u043C-\u0442\u043E
+      \u043E\u0431\u043C\u0443\u043D\u0434\u0435\u0440\u043E\u0432\u0430\u043D\u0438\u0438
+      \u0438\u043B\u0438 \u0435\u0449\u0435 \u0447\u0442\u043E"
+    - "\u041A\u0442\u043E? \u041D\u0435 \u0432\u0430\u0436\u043D\u043E, \u0442\u044B
+      \u0443\u043C\u0440\u0435\u0448\u044C, \u0437\u043B\u043E\u0434\u0435\u0439!"
+    - "\u041A\u0430\u043A\u0430\u044F \u0434\u0435\u043C\u043E\u043A\u0440\u0430\u0442\u0438\u044F?
+      \u0412\u044B \u0432\u0441\u0435 - \u0437\u043B\u043E\u0434\u0435\u0438!"
+    - "\u041C\u043D\u0435 \u0443\u0436\u0435 \u043F\u044B\u0442\u0430\u043B\u0438\u0441\u044C
+      \u044D\u0442\u0438\u043C \u0437\u0430\u0433\u043E\u0432\u043E\u0440\u0438\u0442\u044C
+      \u0437\u0443\u0431\u044B! \u0422\u044B \u0443\u043C\u0440\u0435\u0448\u044C!"
+    SentencesEnemy:
+    - "\u0423 \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u0447\u0438\u043A\u0430
+      \u043D\u0435 \u0431\u044B\u043B\u043E \u0441\u043F\u0440\u0430\u0439\u0442\u0430
+      \u043D\u0430 \u043C\u0435\u043D\u044F, \u043F\u043E\u044D\u0442\u043E\u043C\u0443
+      \u044F \u043F\u0440\u043E\u0441\u0442\u043E \u0431\u043E\u043B\u044C\u0448\u043E\u0439"
+    - "\u0427\u0442\u043E? \u042F \u043F\u0440\u043E\u0441\u0442\u043E \u0440\u0443\u043A\u043E\u0432\u043E\u0436\u0443
+      \u043E\u0431\u044B\u0447\u043D\u044B\u043C\u0438 \u0440\u0430\u0431\u043E\u0442\u043D\u0438\u043A\u0430\u043C\u0438,
+      \u043E\u043D\u0438 \u0432\u044B\u0431\u0440\u0430\u043B\u0438 \u043C\u0435\u043D\u044F
+      \u0433\u043E\u043B\u043E\u0441\u043E\u0432\u0430\u043D\u0438\u0435\u043C, \u0443
+      \u043D\u0430\u0441 \u0434\u0430\u0436\u0435 \u0434\u0435\u043C\u043E\u043A\u0440\u0430\u0442\u0438\u044F"
+    - "\u041C\u044B \u0434\u0430\u0436\u0435 \u043F\u043B\u0430\u0442\u0438\u043C
+      \u043D\u0430\u043B\u043E\u0433\u0438!"
+    - "\u0412\u043E\u0442 \u0436\u0435\u0436..."
 --- !u!1 &596691290
 GameObject:
   m_ObjectHideFlags: 0
@@ -2175,7 +2347,7 @@ GameObject:
   - component: {fileID: 685777559}
   - component: {fileID: 685777558}
   m_Layer: 11
-  m_Name: TriggeerDialogWithGoblin
+  m_Name: TriggerDialogWithGoblin
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -2194,7 +2366,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.011070073, y: 0.2125932}
+  m_Offset: {x: -0.011070073, y: 1.3908824}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2205,7 +2377,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2693702, y: 0.5748136}
+  m_Size: {x: 0.2693702, y: 2.931392}
   m_EdgeRadius: 0
 --- !u!114 &685777559
 MonoBehaviour:
@@ -2219,15 +2391,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a4574ed092f12a43a76e71d245ebae1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerTalkFirst: 1
   ObjectToTalk: {fileID: 2146337010}
   Dialog:
-    sentencesPlayer:
-    - "\u041F\u0440\u0438\u0432\u0435\u0442, \u0442\u0435\u0431\u0435 \u043F\u0438\u0437\u0434\u0430"
-    - "\u041D\u0438\u0437\u044F"
-    sentencesEnemy:
-    - "\u041F\u0440\u0438\u0432\u0435\u0442, \u043C\u043E\u0436\u043D\u043E \u043D\u0435
-      \u043D\u0430\u0434\u0430"
-    - "\u043F\u0435\u0447\u0430\u043B\u044C"
+    SentencesPlayer:
+    - "\u0413\u043E\u0431\u043B\u0438\u043D, \u0442\u044B \u0436\u0430\u043B\u043A\u0438\u0439
+      \u0437\u043B\u043E\u0434\u0435\u0439 \u0438 \u0443\u043C\u0440\u0435\u0448\u044C
+      \u043E\u0442 \u043C\u043E\u0435\u0433\u043E \u043C\u0435\u0447\u0430"
+    - "\u0412\u044B \u0432\u0441\u0435 \u0433\u043E\u0431\u043B\u0438\u043D\u044B
+      - \u0437\u043B\u043E\u0434\u0435\u0438 \u0438 \u043F\u043E-\u0434\u0440\u0443\u0433\u043E\u043C\u0443
+      \u043D\u0435 \u0431\u044B\u0432\u0430\u0435\u0442"
+    - "\u041A\u0430\u043A\u043E\u0439 \u0440\u0430\u0441\u0438\u0437\u043C? \u0412\u044B
+      \u043D\u0435\u043B\u044E\u0434\u0438 \u0438 \u0443\u043C\u0440\u0435\u0442\u0435
+      \u043E\u0442 \u043C\u043E\u0435\u0433\u043E \u0440\u0443\u043A \u0433\u0435\u0440\u043E\u044F!"
+    - "\u0422\u0435\u0431\u0435 \u043C\u0435\u043D\u044F \u043D\u0435 \u043E\u0431\u043C\u0430\u043D\u0443\u0442\u044C,
+      \u0443\u043C\u0440\u0438!"
+    SentencesEnemy:
+    - "\u041D\u043E \u044F \u043F\u0440\u043E\u0441\u0442\u043E \u0440\u0430\u0431\u043E\u0442\u0430\u044E
+      \u0442\u0443\u0442 \u0438 \u043D\u0438\u0447\u0435\u0433\u043E \u043F\u043B\u043E\u0445\u043E\u0433\u043E
+      \u043D\u0435 \u0434\u0435\u043B\u0430\u044E"
+    - "...\u042D\u0442\u043E \u0440\u0430\u0441\u0438\u0437\u043C"
+    - "\u0427\u0442\u043E? \u041C\u044B \u043F\u0440\u043E\u0441\u0442\u043E \u0436\u0438\u0432\u0435\u043C
+      \u0443 \u0441\u0435\u0431\u044F \u0432 \u0434\u0435\u0440\u0435\u0432\u043D\u0435,
+      \u0434\u0430\u0436\u0435 \u043D\u0430\u043B\u043E\u0433\u0438 \u043F\u043B\u0430\u0442\u0438\u043C"
+    - "\u0412\u043E\u0442 \u0436\u0435\u0436..."
 --- !u!4 &685777560
 Transform:
   m_ObjectHideFlags: 0
@@ -3467,6 +3654,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1259616108 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2128851841731925798, guid: 7dfe75006d53d2e4f8e1e6d98a5e4c07,
+    type: 3}
+  m_PrefabInstance: {fileID: 2128851841755725010}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1305473145
 GameObject:
   m_ObjectHideFlags: 0
@@ -3624,7 +3823,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1361334316
 GameObject:
@@ -4279,6 +4478,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1755252491 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1726783490309788188, guid: 9e6664dea91543f4a8b93c8a53dbecb2,
+    type: 3}
+  m_PrefabInstance: {fileID: 103100503}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abfdc70742117474eae990903ce508ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1764356291
 GameObject:
   m_ObjectHideFlags: 0
@@ -5042,77 +5253,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1986895654
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1986895657}
-  - component: {fileID: 1986895656}
-  - component: {fileID: 1986895655}
-  m_Layer: 0
-  m_Name: SpawnBoss
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1986895655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1986895654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7965b78903b2153468aa2affa4c763eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Boss: {fileID: 1726783490309788188, guid: 9e6664dea91543f4a8b93c8a53dbecb2, type: 3}
---- !u!61 &1986895656
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1986895654}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!4 &1986895657
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1986895654}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.77, y: -1.074, z: -0.7441406}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1995274483
 GameObject:
   m_ObjectHideFlags: 0
@@ -5474,10 +5614,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goblin
       objectReference: {fileID: 0}
+    - target: {fileID: 534400346548078649, guid: a773cfc1be82608479f1a288dd7575bd,
+        type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 534400346548078651, guid: a773cfc1be82608479f1a288dd7575bd,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.773
+      value: -0.15
       objectReference: {fileID: 0}
     - target: {fileID: 534400346548078651, guid: a773cfc1be82608479f1a288dd7575bd,
         type: 3}
@@ -5512,7 +5657,7 @@ PrefabInstance:
     - target: {fileID: 534400346548078651, guid: a773cfc1be82608479f1a288dd7575bd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 534400346548078651, guid: a773cfc1be82608479f1a288dd7575bd,
         type: 3}
@@ -5553,6 +5698,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: TabToNextText
       objectReference: {fileID: 0}
+    - target: {fileID: 2128851841731925798, guid: 7dfe75006d53d2e4f8e1e6d98a5e4c07,
+        type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2128851841840351108, guid: 7dfe75006d53d2e4f8e1e6d98a5e4c07,
+        type: 3}
+      propertyPath: TabToNextText
+      value: 
+      objectReference: {fileID: 1259616108}
     - target: {fileID: 2128851841840351109, guid: 7dfe75006d53d2e4f8e1e6d98a5e4c07,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5622,6 +5777,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Text
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2128851843379981799, guid: 7dfe75006d53d2e4f8e1e6d98a5e4c07,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -25
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}

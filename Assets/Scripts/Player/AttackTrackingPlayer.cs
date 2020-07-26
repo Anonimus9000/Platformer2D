@@ -12,7 +12,6 @@ public class AttackTrackingPlayer : MonoBehaviour
     private IEnemy _enemy;
     private SpriteRenderer _spriteRendererPlayer;
     private CircleCollider2D _circleCollider;
-    private Collider2D[] _arrayEnemyToDamage;
     void Start()
     {
         _player = GetComponentInParent<PlayerController>();
@@ -38,20 +37,12 @@ public class AttackTrackingPlayer : MonoBehaviour
         if (trigger.gameObject.layer == _layerMask)
         {
             _enemy = trigger.GetComponent<GoblinController>();
-            //_arrayEnemyToDamage
         }
         else
         {
             _enemy = null;
         }
     }
-
-    //public void Attack()
-    //{
-    //    if (_enemy != null)
-    //        _enemy.TakeDamage(_player.Damage);
-    //    _enemy = null;
-    //}
 
     public void Attack()
     {

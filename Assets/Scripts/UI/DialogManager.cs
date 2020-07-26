@@ -7,14 +7,15 @@ public class DialogManager : MonoBehaviour
 {
     public Text PlayerText;
     public Text AnyCharText;
-    public bool PlayerTalkFirst;
+    public Text TabToNextText;
 
     private bool _nowPlayerTalk;
+    private bool _dialogIsEnd = true;
     private Queue<string> sensencesPlayer;
     private Queue<string> sensencesEnemy;
     void Start()
     {
-        _nowPlayerTalk = PlayerTalkFirst;
+        
         sensencesPlayer = new Queue<string>();
         sensencesEnemy = new Queue<string>();
     }
@@ -22,20 +23,36 @@ public class DialogManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Submit"))
+        if (Input.GetButtonDown("Submit"))
             DisplayNextSentence();
     }
 
-    public void StartDialog(Dialog dialog)
+    void FixedUpdate()
     {
-        sensencesPlayer.Clear();
+        
+    }
 
-        foreach (string sensence in dialog.sentencesPlayer)
+    public bool DialogIsEnd()
+    {
+        return _dialogIsEnd;
+    }
+    public void StartDialog(Dialog dialog, bool PlayerTalkFirst)
+    {
+        _nowPlayerTalk = PlayerTalkFirst;
+
+        TabToNextText.text = "Tab enter to next...";
+
+        _dialogIsEnd = false;
+
+        sensencesPlayer.Clear(); 
+        sensencesEnemy.Clear();
+
+        foreach (string sensence in dialog.SentencesPlayer)
         {
             sensencesPlayer.Enqueue(sensence);
         }
 
-        foreach (string sensence in dialog.sentencesEnemy)
+        foreach (string sensence in dialog.SentencesEnemy)
         {
             sensencesEnemy.Enqueue(sensence);
         }
@@ -45,7 +62,7 @@ public class DialogManager : MonoBehaviour
 
     private void DisplayNextSentence()
     {
-        if (sensencesPlayer.Count == 0)
+        if (sensencesPlayer.Count == 0 && sensencesEnemy.Count == 0)
         {
             EndDialog();
             return;
@@ -67,38 +84,39 @@ public class DialogManager : MonoBehaviour
         if (_nowPlayerTalk)
         {
             PlayerText.text = "";
-            _nowPlayerTalk = !_nowPlayerTalk;
 
             foreach (var letter in sentence.ToCharArray())
             {
-                if (_nowPlayerTalk)
-                    PlayerText.text += letter;
-                else
-                    AnyCharText.text += letter;
+                PlayerText.text += letter;
                 yield return null;
             }
+
+            _nowPlayerTalk = !_nowPlayerTalk;
         }
 
         else if (!_nowPlayerTalk)
         {
             AnyCharText.text = "";
-            _nowPlayerTalk = !_nowPlayerTalk;
 
             foreach (var letter in sentence.ToCharArray())
             {
-                if (_nowPlayerTalk)
-                    PlayerText.text += letter;
-                else
-                    AnyCharText.text += letter;
+
+                AnyCharText.text += letter;
                 yield return null;
             }
+
+            _nowPlayerTalk = !_nowPlayerTalk;
         }
 
     }
 
     private void EndDialog()
     {
-        Debug.Log("End dialog");
+        print("Dialog end");
+        _dialogIsEnd = true;
+        PlayerText.text = "";
+        AnyCharText.text = "";
+        TabToNextText.text = "";
     }
 
 }

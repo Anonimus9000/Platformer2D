@@ -6,14 +6,14 @@ public abstract class EnemyMob : MonoBehaviour, IEnemy
     public float Damage;
     public float Health;
     public float AttackSpeed = 2;
-    public float MoveSpeed = 10f;
+    public float MoveSpeed = 1f;
     public float RangePotrol = 100f;
     public bool Potrol = true;
 
-    private float _moveSpeed;
+    private float _StartMoveSpeed;
     void Start()
     {
-        _moveSpeed = MoveSpeed;
+        _StartMoveSpeed = MoveSpeed;
     }
 
     // Update is called once per frame
@@ -26,6 +26,11 @@ public abstract class EnemyMob : MonoBehaviour, IEnemy
     public abstract void Kill();
 
     public abstract void MoveToPosition(Vector3 position);
+
+    public abstract void MoveToPosition(float xPosition);
+    public abstract void LookRight();
+
+    public abstract void LookLeft();
     public virtual void Attack()
     {
 
@@ -36,15 +41,16 @@ public abstract class EnemyMob : MonoBehaviour, IEnemy
         Health -= damage;
     }
 
-    public void Stand()
+    public virtual void StartStand()
     {
         MoveSpeed = 0;
     }
 
-    public void NoStay()
+    public virtual void StopStand()
     {
-        MoveSpeed = _moveSpeed;
+        MoveSpeed = _StartMoveSpeed;
     }
 
+    
 
 }

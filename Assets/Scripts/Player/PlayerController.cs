@@ -58,6 +58,26 @@ public class PlayerController : MonoBehaviour
         Health -= damage;
     }
 
+    public bool IsLookLeft()
+    {
+        return _spriteRenderer.flipX;
+    }
+
+    public bool IsLookRight()
+    {
+        return !_spriteRenderer.flipX;
+    }
+
+    public void StartStand()
+    {
+        MoveSpeed = 0;
+    }
+
+    public void StopStand()
+    {
+        MoveSpeed = _moveSpeed;
+    }
+
     public bool IsDead()
     {
         return _isDead;
@@ -145,15 +165,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Stand()
-    {
-        MoveSpeed = 0;
-    }
-
-    public void NoStay()
-    {
-        MoveSpeed = _moveSpeed;
-    }
     private void Kill()
     {
         _isDead = true;
