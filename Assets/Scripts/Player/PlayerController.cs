@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Unity.Mathematics;
-using UnityEngine;
-using UnityEngine.PlayerLoop;
+﻿using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -22,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private bool _isDead = false;
     private float _moveSpeed;
     private ComboAttacks _comboAttacks = ComboAttacks.Attack1;
+
     private enum ComboAttacks
     {
         Attack1,
@@ -49,9 +44,10 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(!_isDead)
+        if (!_isDead)
             Move();
     }
+
     public void TakeDamage(float damage)
     {
         _animator.SetTrigger("takeHit");
@@ -86,13 +82,12 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         Run();
-        
+
         Jump();
     }
 
     private void Run()
     {
-        
         if (Input.GetButton("Horizontal"))
         {
             float move = Input.GetAxis("Horizontal");
@@ -100,13 +95,13 @@ public class PlayerController : MonoBehaviour
             _rigidbody2D.velocity = new Vector2(move * MoveSpeed, _rigidbody2D.velocity.y);
 
             _spriteRenderer.flipX = _rigidbody2D.velocity.x < 0.0f;
-
         }
         else
         {
             _animator.SetFloat("speed", 0.0f);
         }
-        if(_rigidbody2D.velocity.x != 0)
+
+        if (_rigidbody2D.velocity.x != 0)
             _animator.SetFloat("speed", MoveSpeed);
     }
 
@@ -114,15 +109,15 @@ public class PlayerController : MonoBehaviour
     {
         if (_rigidbody2D.velocity.y == 0)
             _animator.SetTrigger("idle");
-        if(_rigidbody2D.velocity.y < 0)
+        if (_rigidbody2D.velocity.y < 0)
         {
             _animator.SetFloat("yVelocity", _rigidbody2D.velocity.y);
         }
-        
+
         if (Input.GetButton("Jump"))
         {
             if (_rigidbody2D.velocity.y == 0)
-                _rigidbody2D.AddForce(transform.up * (JumpForce ), ForceMode2D.Impulse);
+                _rigidbody2D.AddForce(transform.up * (JumpForce), ForceMode2D.Impulse);
 
             _animator.SetFloat("yVelocity", _rigidbody2D.velocity.y);
         }
@@ -148,7 +143,6 @@ public class PlayerController : MonoBehaviour
                 _timer = 0;
                 return;
             }
-
         }
     }
 
@@ -171,5 +165,4 @@ public class PlayerController : MonoBehaviour
         _animator.SetTrigger("death");
         Destroy(_attackTracking);
     }
-
 }

@@ -13,15 +13,18 @@ public class GoblinBossController : AbstructBoss
     private PlayerController _player;
     private CapsuleCollider2D _capsuleCollider2D;
     private ComboAttacks _comboAttacks = ComboAttacks.Attack1;
+
     private enum ComboAttacks
     {
         Attack1,
         LastAttack
     }
+
     void Awake()
     {
         _moveSpeed = MoveSpeed;
     }
+
     void Start()
     {
         _attackTracking = GetComponentInChildren<AttackTrackingBossGoblin>();
@@ -37,7 +40,7 @@ public class GoblinBossController : AbstructBoss
     {
         if (_isDead)
             Kill();
-        else if(!_player.IsDead())
+        else if (!_player.IsDead())
             Attack(_player.gameObject);
 
         _timer += Time.deltaTime;
@@ -45,7 +48,7 @@ public class GoblinBossController : AbstructBoss
 
     void FixedUpdate()
     {
-        if(!_player.IsDead())
+        if (!_player.IsDead())
             MoveToObject(_player.gameObject, 1);
     }
 
@@ -63,6 +66,7 @@ public class GoblinBossController : AbstructBoss
     {
         MoveSpeed = 0;
     }
+
     public override void StopStand()
     {
         MoveSpeed = _moveSpeed;
@@ -75,6 +79,7 @@ public class GoblinBossController : AbstructBoss
         if (Health <= 0)
             _isDead = true;
     }
+
     public override void Kill()
     {
         _isSeePlayer = false;
@@ -112,7 +117,8 @@ public class GoblinBossController : AbstructBoss
     {
         if (_timer >= 1 / AttackSpeed)
         {
-            if (Vector2.Distance(objectToAttack.transform.position, gameObject.transform.position) < 0.5 && _comboAttacks == ComboAttacks.Attack1)
+            if (Vector2.Distance(objectToAttack.transform.position, gameObject.transform.position) < 0.5 &&
+                _comboAttacks == ComboAttacks.Attack1)
             {
                 _attackTracking.Attack();
                 _animator.SetTrigger("attack1");
@@ -120,7 +126,7 @@ public class GoblinBossController : AbstructBoss
                 CorrectQueueComboAttacks();
                 return;
             }
-            else if(_comboAttacks == ComboAttacks.LastAttack)
+            else if (_comboAttacks == ComboAttacks.LastAttack)
             {
                 _attackTracking.Attack();
                 _animator.SetTrigger("attack2");
@@ -130,6 +136,7 @@ public class GoblinBossController : AbstructBoss
             }
         }
     }
+
     private void CorrectQueueComboAttacks()
     {
         switch (_comboAttacks)
@@ -142,5 +149,4 @@ public class GoblinBossController : AbstructBoss
                 break;
         }
     }
-
 }

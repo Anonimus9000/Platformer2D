@@ -14,9 +14,9 @@ public class DialogManager : MonoBehaviour
     private bool _dialogIsEnd = true;
     private Queue<string> sensencesPlayer;
     private Queue<string> sensencesEnemy;
+
     void Start()
     {
-        
         sensencesPlayer = new Queue<string>();
         sensencesEnemy = new Queue<string>();
     }
@@ -30,13 +30,13 @@ public class DialogManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        
     }
 
     public bool DialogIsEnd()
     {
         return _dialogIsEnd;
     }
+
     public void StartDialog(Dialog dialog, bool PlayerTalkFirst)
     {
         _nowPlayerTalk = PlayerTalkFirst;
@@ -45,7 +45,7 @@ public class DialogManager : MonoBehaviour
 
         _dialogIsEnd = false;
 
-        sensencesPlayer.Clear(); 
+        sensencesPlayer.Clear();
         sensencesEnemy.Clear();
 
         foreach (string sensence in dialog.SentencesPlayer)
@@ -73,10 +73,10 @@ public class DialogManager : MonoBehaviour
 
         if (_nowPlayerTalk)
             sentence = sensencesPlayer.Dequeue();
-        
-        else 
+
+        else
             sentence = sensencesEnemy.Dequeue();
-        
+
         StartCoroutine(TypeSentence(sentence));
     }
 
@@ -102,7 +102,6 @@ public class DialogManager : MonoBehaviour
 
             foreach (var letter in sentence.ToCharArray())
             {
-
                 AnyCharText.text += letter;
                 yield return null;
             }
@@ -121,5 +120,4 @@ public class DialogManager : MonoBehaviour
         AnyCharText.text = "";
         TabToNextText.text = "";
     }
-
 }

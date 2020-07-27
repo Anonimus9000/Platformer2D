@@ -13,7 +13,8 @@ public class BossHealthBarController : MonoBehaviour
     private float _nowHealth;
     private float _minHealth = 0;
     private bool _healthbarIsCreat = false;
-    void Start()
+
+    private void Start()
     {
         gameObject.SetActive(false);
         _maxHealth = Boss.Health;
@@ -21,7 +22,7 @@ public class BossHealthBarController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Boss.Health <= _minHealth)
         {
@@ -36,7 +37,7 @@ public class BossHealthBarController : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (Boss.IsSeePlayer() && _healthbarIsCreat == false)
         {

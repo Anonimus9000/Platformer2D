@@ -8,7 +8,8 @@ public class AttackTrackingBossGoblin : MonoBehaviour
     private PlayerController _player;
     private SpriteRenderer _spriteRendererGoblin;
     private CircleCollider2D _circleCollider;
-    void Start()
+
+    private void Start()
     {
         _goblinBoss = GetComponent<GoblinBossController>();
         _spriteRendererGoblin = GetComponentInParent<SpriteRenderer>();
@@ -16,28 +17,21 @@ public class AttackTrackingBossGoblin : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (_spriteRendererGoblin.flipX == true)
-        {
             _circleCollider.offset = new Vector2(-(_circleCollider.radius * 2), 0);
-        }
-        else if (_spriteRendererGoblin.flipX == false)
-        {
-            _circleCollider.offset = new Vector2(0, 0);
-        }
+        else if (_spriteRendererGoblin.flipX == false) _circleCollider.offset = new Vector2(0, 0);
     }
-    void OnTriggerEnter2D(Collider2D trigger)
+
+    private void OnTriggerEnter2D(Collider2D trigger)
     {
         if (trigger.gameObject.name == "Player")
-        {
             _player = trigger.GetComponent<PlayerController>();
-        }
         else
-        {
             _player = null;
-        }
     }
+
     public void Attack()
     {
         if (_player != null)

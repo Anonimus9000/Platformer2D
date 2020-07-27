@@ -5,9 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class Dialog
 {
-    
-    [TextArea(3, 10)]
-    public string[] SentencesPlayer;
-    [TextArea(3, 10)]
-    public string[] SentencesEnemy;
+    [TextArea(3, 10)] public string[] SentencesPlayer;
+    [TextArea(3, 10)] public string[] SentencesEnemy;
 }

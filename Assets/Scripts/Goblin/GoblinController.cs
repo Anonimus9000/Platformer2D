@@ -24,6 +24,7 @@ public class GoblinController : EnemyMob
     {
         _moveSpeed = MoveSpeed;
     }
+
     void Start()
     {
         _attackTracking = GetComponentInChildren<AttackTrackingGoblin>();
@@ -42,7 +43,7 @@ public class GoblinController : EnemyMob
             _isDead = true;
             Kill();
         }
-            
+
         if (_isSeePlayer && !_isDead)
             Attack(_player.gameObject);
 
@@ -85,6 +86,7 @@ public class GoblinController : EnemyMob
 
         _spriteRenderer.flipX = _rigidbody2D.velocity.x < 0.0f;
     }
+
     public override void MoveToPosition(float xPosition)
     {
         _animator.SetFloat("speed", MoveSpeed);
@@ -96,6 +98,7 @@ public class GoblinController : EnemyMob
 
         _spriteRenderer.flipX = _rigidbody2D.velocity.x < 0.0f;
     }
+
     public override void TakeDamage(float damage)
     {
         _animator.SetTrigger("takeHit");
@@ -116,9 +119,10 @@ public class GoblinController : EnemyMob
     {
         MoveSpeed = 0;
 
-        if(_animator != null)
+        if (_animator != null)
             _animator.SetTrigger("idle");
     }
+
     public override void StopStand()
     {
         MoveSpeed = _moveSpeed;
@@ -154,7 +158,7 @@ public class GoblinController : EnemyMob
                 _isPotrolRight = true;
         }
     }
-    
+
     private void MoveToObject(GameObject obj)
     {
         if (Vector2.Distance(obj.transform.position, gameObject.transform.position) < RangeVision)

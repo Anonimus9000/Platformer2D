@@ -5,18 +5,19 @@ using UnityEngine;
 public class CreatBossTrigger : MonoBehaviour
 {
     public AbstructBoss Boss;
-    void Start()
+
+    private void Start()
     {
         
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         
     }
 
-    void OnTriggerEnter2D(Collider2D trigger)
+    private void OnTriggerEnter2D(Collider2D trigger)
     {
         if (trigger.gameObject.name == "Player")
         {

@@ -12,6 +12,7 @@ public abstract class EnemyMob : MonoBehaviour, IEnemy
     public bool Potrol = true;
 
     private float _StartMoveSpeed;
+
     void Start()
     {
         _StartMoveSpeed = MoveSpeed;
@@ -20,10 +21,9 @@ public abstract class EnemyMob : MonoBehaviour, IEnemy
     // Update is called once per frame
     void Update()
     {
-        
     }
 
-    
+
     public abstract void Kill();
 
     public abstract void MoveToPosition(Vector3 position);
@@ -32,9 +32,9 @@ public abstract class EnemyMob : MonoBehaviour, IEnemy
     public abstract void LookRight();
 
     public abstract void LookLeft();
+
     public virtual void Attack()
     {
-
     }
 
     public virtual void TakeDamage(float damage)
@@ -51,7 +51,4 @@ public abstract class EnemyMob : MonoBehaviour, IEnemy
     {
         MoveSpeed = _StartMoveSpeed;
     }
-
-    
-
 }

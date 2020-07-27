@@ -8,7 +8,7 @@ public class DialogTrigger : MonoBehaviour
     public bool PlayerTalkFirst = true;
     public EnemyMob ObjectToTalk;
     public Dialog Dialog;
-    
+
     private BoxCollider2D _boxCollider;
     private PlayerController _player;
     private DialogManager _dialogManager;
@@ -18,6 +18,7 @@ public class DialogTrigger : MonoBehaviour
         _dialogManager = FindObjectOfType<DialogManager>();
         ObjectToTalk.StartStand();
     }
+
     void FixedUpdate()
     {
         if (_player != null)
@@ -38,6 +39,7 @@ public class DialogTrigger : MonoBehaviour
             }
         }
     }
+
     private void TriggerDialog()
     {
         _dialogManager.StartDialog(Dialog, PlayerTalkFirst);
@@ -58,5 +60,4 @@ public class DialogTrigger : MonoBehaviour
             _player = null;
         }
     }
-
 }

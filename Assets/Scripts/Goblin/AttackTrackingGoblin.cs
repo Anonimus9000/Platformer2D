@@ -8,6 +8,7 @@ public class AttackTrackingGoblin : MonoBehaviour
     private PlayerController _player;
     private SpriteRenderer _spriteRendererGoblin;
     private CircleCollider2D _circleCollider;
+
     void Start()
     {
         _goblin = GetComponentInParent<GoblinController>();
@@ -39,6 +40,7 @@ public class AttackTrackingGoblin : MonoBehaviour
             _player = null;
         }
     }
+
     public void Attack()
     {
         if (_player != null)

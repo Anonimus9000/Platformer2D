@@ -9,6 +9,7 @@ public class DialogBossTrigger : MonoBehaviour
     private BoxCollider2D _boxCollider;
     private PlayerController _player;
     private DialogManager _dialogManager;
+
     void Start()
     {
         _dialogManager = FindObjectOfType<DialogManager>();

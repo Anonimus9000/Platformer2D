@@ -15,6 +15,7 @@ public abstract class AbstructBoss : MonoBehaviour, IEnemy
     public abstract void StopStand();
     public abstract void LookLeft();
     public abstract void LookRight();
+
     public virtual void TakeDamage(float damage)
     {
         Health -= damage;
@@ -24,7 +25,4 @@ public abstract class AbstructBoss : MonoBehaviour, IEnemy
     {
         Destroy(gameObject);
     }
-
-    
-
 }
