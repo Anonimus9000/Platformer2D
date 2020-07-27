@@ -723,10 +723,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoblinBoss
       objectReference: {fileID: 0}
+    - target: {fileID: 1726783490309788181, guid: 9e6664dea91543f4a8b93c8a53dbecb2,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -0.08581947
+      objectReference: {fileID: 0}
+    - target: {fileID: 1726783490309788181, guid: 9e6664dea91543f4a8b93c8a53dbecb2,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.3346686
+      objectReference: {fileID: 0}
     - target: {fileID: 1726783490309788182, guid: 9e6664dea91543f4a8b93c8a53dbecb2,
         type: 3}
       propertyPath: m_Mass
-      value: 0.3
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1726783490309788182, guid: 9e6664dea91543f4a8b93c8a53dbecb2,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1726783490309788188, guid: 9e6664dea91543f4a8b93c8a53dbecb2,
         type: 3}

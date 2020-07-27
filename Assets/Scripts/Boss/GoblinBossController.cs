@@ -12,7 +12,12 @@ public class GoblinBossController : AbstructBoss
     private Animator _animator;
     private PlayerController _player;
     private CapsuleCollider2D _capsuleCollider2D;
-
+    private ComboAttacks _comboAttacks = ComboAttacks.Attack1;
+    private enum ComboAttacks
+    {
+        Attack1,
+        LastAttack
+    }
     void Awake()
     {
         _moveSpeed = MoveSpeed;
@@ -107,13 +112,35 @@ public class GoblinBossController : AbstructBoss
     {
         if (_timer >= 1 / AttackSpeed)
         {
-            if (Vector2.Distance(objectToAttack.transform.position, gameObject.transform.position) < 0.5)
+            if (Vector2.Distance(objectToAttack.transform.position, gameObject.transform.position) < 0.5 && _comboAttacks == ComboAttacks.Attack1)
             {
                 _attackTracking.Attack();
                 _animator.SetTrigger("attack1");
                 _timer = 0;
+                CorrectQueueComboAttacks();
+                return;
+            }
+            else if(_comboAttacks == ComboAttacks.LastAttack)
+            {
+                _attackTracking.Attack();
+                _animator.SetTrigger("attack2");
+                _timer = 0;
+                CorrectQueueComboAttacks();
+                return;
             }
         }
     }
-    
+    private void CorrectQueueComboAttacks()
+    {
+        switch (_comboAttacks)
+        {
+            case ComboAttacks.Attack1:
+                _comboAttacks = ComboAttacks.LastAttack;
+                break;
+            case ComboAttacks.LastAttack:
+                _comboAttacks = ComboAttacks.Attack1;
+                break;
+        }
+    }
+
 }
