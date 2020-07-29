@@ -69,6 +69,9 @@ public class DialogManager : MonoBehaviour
             return;
         }
 
+        if (sensencesEnemy.Count == 0)
+            _nowPlayerTalk = true;
+
         string sentence = "";
 
         if (_nowPlayerTalk)
@@ -114,7 +117,6 @@ public class DialogManager : MonoBehaviour
 
     private void EndDialog()
     {
-        print("Dialog is end");
         _dialogIsEnd = true;
         PlayerText.text = "";
         AnyCharText.text = "";

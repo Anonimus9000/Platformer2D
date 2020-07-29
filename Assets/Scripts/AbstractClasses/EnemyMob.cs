@@ -23,9 +23,6 @@ public abstract class EnemyMob : MonoBehaviour, IEnemy
     {
     }
 
-
-    public abstract void Kill();
-
     public abstract void MoveToPosition(Vector3 position);
 
     public abstract void MoveToPosition(float xPosition);
@@ -33,8 +30,15 @@ public abstract class EnemyMob : MonoBehaviour, IEnemy
 
     public abstract void LookLeft();
 
-    public virtual void Attack()
+    
+    public virtual void Kill()
     {
+        Destroy(gameObject);
+    }
+
+    public virtual void Attack(PlayerController player)
+    {
+        player.TakeDamage(Damage);
     }
 
     public virtual void TakeDamage(float damage)
