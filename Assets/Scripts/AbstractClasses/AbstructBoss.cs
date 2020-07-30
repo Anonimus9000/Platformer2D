@@ -15,6 +15,8 @@ public abstract class AbstructBoss : MonoBehaviour, IEnemy
     public abstract void StopStand();
     public abstract void LookLeft();
     public abstract void LookRight();
+    public abstract void StartFight();
+    public abstract void StopFight();
 
     public virtual void TakeDamage(float damage)
     {

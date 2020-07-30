@@ -2,6 +2,7 @@
 
 public class GoblinBossController : AbstructBoss
 {
+    private bool _isFight = false;
     private float _moveSpeed;
     private bool _isSeePlayer = false;
     private float _timer;
@@ -50,6 +51,14 @@ public class GoblinBossController : AbstructBoss
     {
         if (!_player.IsDead())
             MoveToObject(_player.gameObject, 2);
+
+        if (IsSeePlayer())
+            StartFight();
+        else if (_isFight)
+        {
+            StopFight();
+            _isFight = false;
+        }
     }
 
     public override void LookRight()
@@ -70,6 +79,16 @@ public class GoblinBossController : AbstructBoss
     public override void StopStand()
     {
         MoveSpeed = _moveSpeed;
+    }
+
+    public override void StartFight()
+    {
+        _player.StartFight();
+    }
+
+    public override void StopFight()
+    {
+        _player.StopFight();
     }
 
     public override void TakeDamage(float damage)
@@ -111,6 +130,8 @@ public class GoblinBossController : AbstructBoss
 
             _spriteRenderer.flipX = _rigidbody2D.velocity.x < 0.0f;
         }
+        else if (obj.tag == "Player")
+            _isSeePlayer = false;
     }
 
     private void Attack(GameObject objectToAttack)

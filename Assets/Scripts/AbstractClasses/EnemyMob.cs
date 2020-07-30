@@ -24,13 +24,13 @@ public abstract class EnemyMob : MonoBehaviour, IEnemy
     }
 
     public abstract void MoveToPosition(Vector3 position);
-
     public abstract void MoveToPosition(float xPosition);
     public abstract void LookRight();
-
+    public abstract void StartFight();
+    public abstract void StopFight();
     public abstract void LookLeft();
 
-    
+
     public virtual void Kill()
     {
         Destroy(gameObject);

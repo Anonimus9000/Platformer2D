@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private float _timer = 0;
     private bool _isDead = false;
+    private bool _isFight = false;
     private float _moveSpeed;
     private ComboAttacks _comboAttacks = ComboAttacks.Attack1;
 
@@ -39,12 +40,14 @@ public class PlayerController : MonoBehaviour
         _timer += Time.deltaTime;
         if (Health <= 0)
             Kill();
-        Attack();
+        if(MoveSpeed > 0)
+            Attack();
     }
 
     void FixedUpdate()
     {
-        if (!_isDead)
+        print("Player is fight = " + _isFight);
+        if (!_isDead && MoveSpeed > 0)
             Move();
     }
 
@@ -79,6 +82,20 @@ public class PlayerController : MonoBehaviour
         return _isDead;
     }
 
+    public void StartFight()
+    {
+        _isFight = true;
+    }
+
+    public void StopFight()
+    {
+        _isFight = false;
+    }
+
+    public bool IsFight()
+    {
+        return _isFight;
+    }
     private void Move()
     {
         Run();

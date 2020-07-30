@@ -28,7 +28,7 @@ public class AttackTrackingEnemy : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D trigger)
+    void OnTriggerStay2D(Collider2D trigger)
     {
         if (trigger.gameObject.name == "Player")
         {

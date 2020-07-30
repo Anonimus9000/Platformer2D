@@ -15,6 +15,7 @@ public class WarrirorController : EnemyMob
 
     private bool _isDead = false;
     private bool _isSeePlayer = false;
+    private bool _isFight = false;
     private AttackTrackingEnemy _attackTracking;
     private float _timer = 0;
     private float _moveSpeed;
@@ -68,16 +69,29 @@ public class WarrirorController : EnemyMob
     {
         if (Health > 0)
         {
-            if (Potrol)
+            if (Potrol && !IsSeePlayer())
                 EnemyPotrol();
-            if (!_player.IsDead())
-            {
-            }
 
-            if (MoveSpeed != 0)
+            if (MoveSpeed > 0)
                 MoveToObject(_player.gameObject);
+
+            if (IsSeePlayer())
+                StartFight();
+            else if (_isFight)
+            {
+                StopFight();
+                _isFight = false;
+            }
         }
+        else if (_isFight)
+        {
+            StopFight();
+            _isFight = false;
+        }
+
+
     }
+
 
     public override void LookLeft()
     {
@@ -87,6 +101,41 @@ public class WarrirorController : EnemyMob
     public override void LookRight()
     {
         _spriteRenderer.flipX = false;
+    }
+
+    public override void TakeDamage(float damage)
+    {
+        _animator.SetTrigger("takeHit");
+        Health -= damage;
+    }
+
+    public override void StartStand()
+    {
+        MoveSpeed = 0;
+
+        if (_animator != null)
+            _animator.SetTrigger("idle");
+    }
+
+    public override void StopStand()
+    {
+        MoveSpeed = _moveSpeed;
+        _animator.SetFloat("speed", MoveSpeed);
+    }
+
+    public override void StartFight()
+    {
+        _player.StartFight();
+    }
+
+    public override void StopFight()
+    {
+        _player.StopFight();
+    }
+
+    public bool Isdead()
+    {
+        return _isDead;
     }
 
     public override void Kill()
@@ -123,29 +172,29 @@ public class WarrirorController : EnemyMob
         _spriteRenderer.flipX = _rigidbody2D.velocity.x < 0.0f;
     }
 
-    public override void TakeDamage(float damage)
+    private void MoveToObject(GameObject obj)
     {
-        _animator.SetTrigger("takeHit");
-        Health -= damage;
+        if (Vector2.Distance(obj.transform.position, gameObject.transform.position) < RangeVision)
+        {
+            _isSeePlayer = true;
+            _isFight = true;
+            print("start figth");
+            _player.StartFight();
+            _animator.SetFloat("speed", Mathf.Abs(_rigidbody2D.velocity.x));
+
+            if (obj.transform.position.x < gameObject.transform.position.x)
+                _rigidbody2D.velocity = new Vector2(-MoveSpeed, _rigidbody2D.velocity.y);
+            if (obj.transform.position.x > gameObject.transform.position.x)
+                _rigidbody2D.velocity = new Vector2(MoveSpeed, _rigidbody2D.velocity.y);
+
+            _spriteRenderer.flipX = _rigidbody2D.velocity.x < 0.0f;
+        }
+        else
+            _isSeePlayer = false;
     }
-
-    public override void StartStand()
+    private bool IsSeePlayer()
     {
-        MoveSpeed = 0;
-
-        if (_animator != null)
-            _animator.SetTrigger("idle");
-    }
-
-    public override void StopStand()
-    {
-        MoveSpeed = _moveSpeed;
-        _animator.SetFloat("speed", MoveSpeed);
-    }
-
-    public bool Isdead()
-    {
-        return _isDead;
+        return _isSeePlayer;
     }
 
     private void EnemyPotrol()
@@ -170,22 +219,6 @@ public class WarrirorController : EnemyMob
 
             if (_nowPositionPotrol >= RangePotrol)
                 _isPotrolRight = true;
-        }
-    }
-
-    private void MoveToObject(GameObject obj)
-    {
-        if (Vector2.Distance(obj.transform.position, gameObject.transform.position) < RangeVision)
-        {
-            _isSeePlayer = true;
-            _animator.SetFloat("speed", Mathf.Abs(_rigidbody2D.velocity.x));
-
-            if (obj.transform.position.x < gameObject.transform.position.x)
-                _rigidbody2D.velocity = new Vector2(-MoveSpeed, _rigidbody2D.velocity.y);
-            if (obj.transform.position.x > gameObject.transform.position.x)
-                _rigidbody2D.velocity = new Vector2(MoveSpeed, _rigidbody2D.velocity.y);
-
-            _spriteRenderer.flipX = _rigidbody2D.velocity.x < 0.0f;
         }
     }
 

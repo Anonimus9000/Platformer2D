@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BanditController : EnemyMob
 {
+    private bool _isFight = false;
     private bool _isDead = false;
     private bool _isSeePlayer = false;
     private AttackTrackingEnemy _attackTracking;
@@ -44,24 +45,31 @@ public class BanditController : EnemyMob
         if (_isSeePlayer && !_isDead)
             Attack(_player.gameObject);
 
+
         _timer += Time.deltaTime;
     }
 
     void FixedUpdate()
     {
-        print(MoveSpeed);
         if (Health > 0)
         {
             if (Potrol)
                 EnemyPotrol();
-            if (!_player.IsDead())
-            {
+           
+            if (IsSeePlayer())
+                StartFight();
+            else if (_isFight){
+                StopFight();
+                _isFight = false;
             }
 
             if (MoveSpeed != 0)
                 MoveToObject(_player.gameObject);
+
         }
     }
+
+    
 
     public override void LookLeft()
     {
@@ -71,6 +79,16 @@ public class BanditController : EnemyMob
     public override void LookRight()
     {
         _spriteRenderer.flipX = false;
+    }
+
+    public override void StartFight()
+    {
+        _player.StartFight();
+    }
+
+    public override void StopFight()
+    {
+        _player.StopFight();
     }
 
     public override void Kill()
@@ -131,6 +149,10 @@ public class BanditController : EnemyMob
     {
         return _isDead;
     }
+    private bool IsSeePlayer()
+    {
+        return _isSeePlayer;
+    }
 
     private void EnemyPotrol()
     {
@@ -160,6 +182,7 @@ public class BanditController : EnemyMob
     {
         if (Vector2.Distance(obj.transform.position, gameObject.transform.position) < RangeVision)
         {
+            _isFight = true;
             _isSeePlayer = true;
             _animator.SetFloat("speed", Mathf.Abs(_rigidbody2D.velocity.x));
 
@@ -170,6 +193,8 @@ public class BanditController : EnemyMob
 
             _spriteRenderer.flipX = _rigidbody2D.velocity.x < 0.0f;
         }
+        else if (obj.tag == "Player")
+            _isSeePlayer = false;
     }
     private void Attack(GameObject obj)
     {

@@ -36,6 +36,10 @@ public class DialogManager : MonoBehaviour
     {
         return _dialogIsEnd;
     }
+    public void SetDialogIsEnd(bool isEnd)
+    {
+        _dialogIsEnd = isEnd;
+    }
 
     public void StartDialog(Dialog dialog, bool PlayerTalkFirst)
     {

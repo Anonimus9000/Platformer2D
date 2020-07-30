@@ -9,6 +9,7 @@ public class DialogTrigger : MonoBehaviour
     public EnemyMob ObjectToTalk;
     public Dialog Dialog;
 
+    private bool _dialogIsStart = false;
     private BoxCollider2D _boxCollider;
     private PlayerController _player;
     private DialogManager _dialogManager;
@@ -22,8 +23,6 @@ public class DialogTrigger : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(_player != null)
-            print("player not null");
         if (_player != null && ObjectToTalk != null)
         {
             if (_player.IsLookRight())
@@ -32,13 +31,13 @@ public class DialogTrigger : MonoBehaviour
                 ObjectToTalk.LookRight();
         }
 
-        if (_dialogManager.DialogIsEnd() == true)
+        if (_player != null)
         {
-            if (_player != null)
+            if (_dialogManager.DialogIsEnd() == true && !_player.IsFight())
             {
                 _player.StopStand();
 
-                if(ObjectToTalk != null)
+                if (ObjectToTalk != null)
                     ObjectToTalk.StopStand();
 
                 Destroy(gameObject);
@@ -55,11 +54,16 @@ public class DialogTrigger : MonoBehaviour
     {
         if (trigger.gameObject.name == "Player")
         {
+            bool temp = false;
+            _dialogManager.SetDialogIsEnd(temp);
+
             _player = trigger.GetComponent<PlayerController>();
+            if (!_player.IsFight())
+            {
+                _player.StartStand();
 
-            _player.StartStand();
-
-            TriggerDialog();
+                TriggerDialog();
+            }
         }
         else
         {

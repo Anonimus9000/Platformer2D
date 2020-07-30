@@ -50,14 +50,29 @@ public class GoblinController : EnemyMob
         if (Health > 0)
         {
             if (Potrol)
-                EnemyPotrol();
-            if (!_player.IsDead())
             {
+                EnemyPotrol();
             }
 
             if (MoveSpeed != 0)
+            {
                 MoveToObject(_player.gameObject);
+            }
         }
+        if(_isSeePlayer)
+            StartFight();
+        else
+            StopFight();
+    }
+
+    public override void StartFight()
+    {
+        _player.StartFight();
+    }
+
+    public override void StopFight()
+    {
+        _player.StopFight();
     }
 
     public override void LookLeft()
@@ -131,6 +146,7 @@ public class GoblinController : EnemyMob
 
     private void EnemyPotrol()
     {
+        _isSeePlayer = false;
         _animator.SetFloat("speed", MoveSpeed);
         if (_isPotrolRight)
         {
@@ -168,6 +184,8 @@ public class GoblinController : EnemyMob
 
             _spriteRenderer.flipX = _rigidbody2D.velocity.x < 0.0f;
         }
+        else if(obj.tag == "Player")
+            _isSeePlayer = false;
     }
 
 
