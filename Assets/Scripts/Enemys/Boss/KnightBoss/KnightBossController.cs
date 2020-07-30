@@ -15,10 +15,12 @@ public class KnightBossController : AbstructBoss
     private Animator _animator;
     private PlayerController _player;
     private CapsuleCollider2D _capsuleCollider2D;
+
     void Awake()
     {
         _moveSpeed = MoveSpeed;
     }
+
     void Start()
     {
         _attackTracking = GetComponentInChildren<AttackTrackingBossGoblin>();
@@ -42,7 +44,7 @@ public class KnightBossController : AbstructBoss
 
     void FixedUpdate()
     {
-        if(IsSeePlayer())
+        if (IsSeePlayer())
             StartFight();
         else if (_isFight)
         {
@@ -52,7 +54,6 @@ public class KnightBossController : AbstructBoss
 
         if (!_player.IsDead())
             MoveToObject(_player.gameObject, 2);
-
     }
 
     public override void LookRight()
@@ -124,7 +125,7 @@ public class KnightBossController : AbstructBoss
 
             _spriteRenderer.flipX = _rigidbody2D.velocity.x < 0.0f;
         }
-        else if(obj.tag == "Player")
+        else if (obj.tag == "Player")
             _isSeePlayer = false;
     }
 

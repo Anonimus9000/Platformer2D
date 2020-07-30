@@ -2,6 +2,7 @@
 
 public class GoblinController : EnemyMob
 {
+    private bool _isFight = false;
     private bool _isDead = false;
     private bool _isSeePlayer = false;
     private AttackTrackingEnemy _attackTracking;
@@ -39,7 +40,7 @@ public class GoblinController : EnemyMob
             Kill();
         }
 
-        if (_isSeePlayer && !_isDead)
+        if (_isSeePlayer && !_isDead && _player != null)
             Attack(_player.gameObject);
 
         _timer += Time.deltaTime;
@@ -58,11 +59,19 @@ public class GoblinController : EnemyMob
             {
                 MoveToObject(_player.gameObject);
             }
+            if (IsSeePlayer())
+                StartFight();
+            else if (_isFight)
+            {
+                StopFight();
+                _isFight = false;
+            }
         }
-        if(_isSeePlayer)
-            StartFight();
-        else
+        else if (_isFight)
+        {
             StopFight();
+            _isFight = false;
+        }
     }
 
     public override void StartFight()
@@ -143,6 +152,10 @@ public class GoblinController : EnemyMob
     {
         return _isDead;
     }
+    private bool IsSeePlayer()
+    {
+        return _isSeePlayer;
+    }
 
     private void EnemyPotrol()
     {
@@ -175,6 +188,8 @@ public class GoblinController : EnemyMob
         if (Vector2.Distance(obj.transform.position, gameObject.transform.position) < RangeVision)
         {
             _isSeePlayer = true;
+            _isFight = true;
+            _player.StartFight();
             _animator.SetFloat("speed", MoveSpeed);
 
             if (obj.transform.position.x < gameObject.transform.position.x)

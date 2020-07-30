@@ -178,7 +178,6 @@ public class WarrirorController : EnemyMob
         {
             _isSeePlayer = true;
             _isFight = true;
-            print("start figth");
             _player.StartFight();
             _animator.SetFloat("speed", Mathf.Abs(_rigidbody2D.velocity.x));
 

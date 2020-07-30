@@ -41,7 +41,7 @@ public class GoblinBossController : AbstructBoss
     {
         if (_isDead)
             Kill();
-        else if (!_player.IsDead())
+        else if (!_player.IsDead() && _player != null)
             Attack(_player.gameObject);
 
         _timer += Time.deltaTime;
@@ -49,11 +49,19 @@ public class GoblinBossController : AbstructBoss
 
     void FixedUpdate()
     {
-        if (!_player.IsDead())
-            MoveToObject(_player.gameObject, 2);
+        if (Health > 0)
+        {
+            if (!_player.IsDead())
+                MoveToObject(_player.gameObject, 2);
 
-        if (IsSeePlayer())
-            StartFight();
+            if (IsSeePlayer())
+                StartFight();
+            else if (_isFight)
+            {
+                StopFight();
+                _isFight = false;
+            }
+        }
         else if (_isFight)
         {
             StopFight();
@@ -120,6 +128,8 @@ public class GoblinBossController : AbstructBoss
         if (Vector2.Distance(obj.transform.position, gameObject.transform.position) < distance)
         {
             _isSeePlayer = true;
+            _isFight = true;
+            _player.StartFight();
 
             _animator.SetFloat("speed", MoveSpeed);
 

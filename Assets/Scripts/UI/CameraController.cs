@@ -12,12 +12,14 @@ public class CameraController : MonoBehaviour
     public float Dumping = 1.5f;
     public Vector2 Offset = new Vector2(2f, 1f);
     public bool IsLeft;
+    public GameObject MainObject;
      
     private Transform _player;
     private int _lastX;
 
     void Start()
     {
+        _player = MainObject.transform;
         Offset = new Vector2(Mathf.Abs(Offset.x), Offset.y);
         FindPlayer(IsLeft);
     }
@@ -59,7 +61,6 @@ public class CameraController : MonoBehaviour
 
     public void FindPlayer(bool playerIsLeft)
     {
-        _player = GameObject.FindGameObjectWithTag("Player").transform;
         _lastX = Mathf.RoundToInt(_player.position.x);
         if (playerIsLeft)
         {

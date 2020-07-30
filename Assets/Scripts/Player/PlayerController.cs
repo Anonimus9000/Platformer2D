@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
         _timer += Time.deltaTime;
         if (Health <= 0)
             Kill();
-        if(MoveSpeed > 0)
+        if (MoveSpeed > 0)
             Attack();
     }
 
@@ -96,6 +96,7 @@ public class PlayerController : MonoBehaviour
     {
         return _isFight;
     }
+
     private void Move()
     {
         Run();
