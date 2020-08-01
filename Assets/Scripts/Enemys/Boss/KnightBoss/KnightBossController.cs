@@ -44,16 +44,24 @@ public class KnightBossController : AbstructBoss
 
     void FixedUpdate()
     {
-        if (IsSeePlayer())
-            StartFight();
+        if (Health > 0)
+        {
+            if (!_player.IsDead())
+                MoveToObject(_player.gameObject);
+
+            if (IsSeePlayer())
+                StartFight();
+            else if (_isFight)
+            {
+                StopFight();
+                _isFight = false;
+            }
+        }
         else if (_isFight)
         {
             StopFight();
             _isFight = false;
         }
-
-        if (!_player.IsDead())
-            MoveToObject(_player.gameObject, 2);
     }
 
     public override void LookRight()
@@ -110,13 +118,15 @@ public class KnightBossController : AbstructBoss
         return _isSeePlayer;
     }
 
-    private void MoveToObject(GameObject obj, int distance)
+    private void MoveToObject(GameObject obj)
     {
-        if (Vector2.Distance(obj.transform.position, gameObject.transform.position) < distance)
+        if (Vector2.Distance(obj.transform.position, gameObject.transform.position) < RangeVision)
         {
             _isSeePlayer = true;
+            _isFight = true;
+            _player.StartFight();
 
-            _animator.SetFloat("speed", MoveSpeed);
+            _animator.SetFloat("speed", Mathf.Abs(_rigidbody2D.velocity.x));
 
             if (obj.transform.position.x < gameObject.transform.position.x)
                 _rigidbody2D.velocity = new Vector2(-MoveSpeed, _rigidbody2D.velocity.y);
@@ -133,11 +143,14 @@ public class KnightBossController : AbstructBoss
     {
         if (_timer >= 1 / AttackSpeed)
         {
-            if (Vector2.Distance(ObjectToAttack.transform.position, gameObject.transform.position) < 0.5)
+            if (ObjectToAttack != null)
             {
-                _attackTracking.Attack();
-                _animator.SetTrigger("attack1");
-                _timer = 0;
+                if (Vector2.Distance(ObjectToAttack.transform.position, gameObject.transform.position) < 0.5)
+                {
+                    _attackTracking.Attack();
+                    _animator.SetTrigger("attack1");
+                    _timer = 0;
+                }
             }
         }
     }

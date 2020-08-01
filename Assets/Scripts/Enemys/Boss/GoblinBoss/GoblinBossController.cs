@@ -52,7 +52,7 @@ public class GoblinBossController : AbstructBoss
         if (Health > 0)
         {
             if (!_player.IsDead())
-                MoveToObject(_player.gameObject, 2);
+                MoveToObject(_player.gameObject);
 
             if (IsSeePlayer())
                 StartFight();
@@ -123,9 +123,9 @@ public class GoblinBossController : AbstructBoss
         return _isSeePlayer;
     }
 
-    private void MoveToObject(GameObject obj, int distance)
+    private void MoveToObject(GameObject obj)
     {
-        if (Vector2.Distance(obj.transform.position, gameObject.transform.position) < distance)
+        if (Vector2.Distance(obj.transform.position, gameObject.transform.position) < RangeVision)
         {
             _isSeePlayer = true;
             _isFight = true;

@@ -46,12 +46,20 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        _animator.SetFloat("speed", Mathf.Abs(_rigidbody2D.velocity.x));
         print("Player is fight = " + _isFight);
         if (!_isDead && MoveSpeed > 0)
             Move();
     }
 
-    public void TakeDamage(float damage)
+    public void Kill()
+    {
+        _isDead = true;
+        _animator.SetTrigger("death");
+        Destroy(_attackTracking);
+    }
+
+public void TakeDamage(float damage)
     {
         _animator.SetTrigger("takeHit");
         Health -= damage;
@@ -114,13 +122,7 @@ public class PlayerController : MonoBehaviour
 
             _spriteRenderer.flipX = _rigidbody2D.velocity.x < 0.0f;
         }
-        else
-        {
-            _animator.SetFloat("speed", 0.0f);
-        }
-
-        if (_rigidbody2D.velocity.x != 0)
-            _animator.SetFloat("speed", MoveSpeed);
+        
     }
 
     private void Jump()
@@ -177,10 +179,4 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Kill()
-    {
-        _isDead = true;
-        _animator.SetTrigger("death");
-        Destroy(_attackTracking);
-    }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public abstract class AbstructBoss : MonoBehaviour, IEnemy
 {
+    public float RangeVision;
     public float Health;
     public float Damage;
     public float AttackSpeed;

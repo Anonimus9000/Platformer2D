@@ -53,19 +53,24 @@ public class BanditController : EnemyMob
     {
         if (Health > 0)
         {
-            if (Potrol)
+            if (Potrol && !IsSeePlayer())
                 EnemyPotrol();
-           
+
+            if (MoveSpeed > 0)
+                MoveToObject(_player.gameObject);
+
             if (IsSeePlayer())
                 StartFight();
-            else if (_isFight){
+            else if (_isFight)
+            {
                 StopFight();
                 _isFight = false;
             }
-
-            if (MoveSpeed != 0)
-                MoveToObject(_player.gameObject);
-
+        }
+        else if (_isFight)
+        {
+            StopFight();
+            _isFight = false;
         }
     }
 
