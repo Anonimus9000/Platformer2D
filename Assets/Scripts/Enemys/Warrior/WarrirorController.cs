@@ -27,6 +27,7 @@ public class WarrirorController : EnemyMob
     private PlayerController _player;
     private CapsuleCollider2D _capsuleCollider2D;
     private ComboAttacks _comboAttacks = ComboAttacks.Attack1;
+    private EnemyAudioController _enemyAudioController;
 
     private enum ComboAttacks
     {
@@ -48,6 +49,7 @@ public class WarrirorController : EnemyMob
         _animator = GetComponent<Animator>();
         _player = FindObjectOfType<PlayerController>();
         _capsuleCollider2D = GetComponent<CapsuleCollider2D>();
+        _enemyAudioController = GetComponentInChildren<EnemyAudioController>();
     }
 
 
@@ -106,6 +108,7 @@ public class WarrirorController : EnemyMob
     public override void TakeDamage(float damage)
     {
         _animator.SetTrigger("takeHit");
+        _enemyAudioController.PlayTakeDamageAudio();
         Health -= damage;
     }
 
@@ -236,6 +239,7 @@ public class WarrirorController : EnemyMob
                 {
                     _attackTracking.Attack();
                     _animator.SetTrigger("attack1");
+                    _enemyAudioController.PlayAttackAudio();
                     _timer = 0;
                     CorrectQueueComboAttacks();
                     return;
@@ -244,6 +248,7 @@ public class WarrirorController : EnemyMob
                 {
                     _attackTracking.Attack();
                     _animator.SetTrigger("attack2");
+                    _enemyAudioController.PlayAttackAudio();
                     _timer = 0;
                     CorrectQueueComboAttacks();
                     return;

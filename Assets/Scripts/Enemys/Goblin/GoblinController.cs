@@ -15,6 +15,7 @@ public class GoblinController : EnemyMob
     private Animator _animator;
     private PlayerController _player;
     private CapsuleCollider2D _capsuleCollider2D;
+    private EnemyAudioController _enemyAudioController;
 
     void Awake()
     {
@@ -30,6 +31,7 @@ public class GoblinController : EnemyMob
         _animator = GetComponent<Animator>();
         _player = FindObjectOfType<PlayerController>();
         _capsuleCollider2D = GetComponent<CapsuleCollider2D>();
+        _enemyAudioController = GetComponentInChildren<EnemyAudioController>();
     }
 
     void Update()
@@ -121,6 +123,7 @@ public class GoblinController : EnemyMob
     public override void TakeDamage(float damage)
     {
         _animator.SetTrigger("takeHit");
+        _enemyAudioController.PlayTakeDamageAudio();
         Health -= damage;
     }
 
@@ -212,6 +215,7 @@ public class GoblinController : EnemyMob
             {
                 _attackTracking.Attack();
                 _animator.SetTrigger("attack1");
+                _enemyAudioController.PlayAttackAudio();
                 _timer = 0;
             }
         }

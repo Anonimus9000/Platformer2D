@@ -14,6 +14,7 @@ public class GoblinBossController : AbstructBoss
     private PlayerController _player;
     private CapsuleCollider2D _capsuleCollider2D;
     private ComboAttacks _comboAttacks = ComboAttacks.Attack1;
+    private EnemyAudioController _enemyAudioController;
 
     private enum ComboAttacks
     {
@@ -34,6 +35,7 @@ public class GoblinBossController : AbstructBoss
         _animator = GetComponent<Animator>();
         _player = FindObjectOfType<PlayerController>();
         _capsuleCollider2D = GetComponent<CapsuleCollider2D>();
+        _enemyAudioController = GetComponentInChildren<EnemyAudioController>();
     }
 
     // Update is called once per frame
@@ -102,6 +104,7 @@ public class GoblinBossController : AbstructBoss
     public override void TakeDamage(float damage)
     {
         _animator.SetTrigger("takeHit");
+        _enemyAudioController.PlayTakeDamageAudio();
         Health -= damage;
         if (Health <= 0)
             _isDead = true;
@@ -153,6 +156,7 @@ public class GoblinBossController : AbstructBoss
             {
                 _attackTracking.Attack();
                 _animator.SetTrigger("attack1");
+                _enemyAudioController.PlayAttackAudio();
                 _timer = 0;
                 CorrectQueueComboAttacks();
                 return;
@@ -161,6 +165,7 @@ public class GoblinBossController : AbstructBoss
             {
                 _attackTracking.Attack();
                 _animator.SetTrigger("attack2");
+                _enemyAudioController.PlayAttackAudio();
                 _timer = 0;
                 CorrectQueueComboAttacks();
                 return;

@@ -17,6 +17,7 @@ public class BanditController : EnemyMob
     private Animator _animator;
     private PlayerController _player;
     private CapsuleCollider2D _capsuleCollider2D;
+    private EnemyAudioController _enemyAudioController;
 
     void Awake()
     {
@@ -31,6 +32,7 @@ public class BanditController : EnemyMob
         _animator = GetComponent<Animator>();
         _player = FindObjectOfType<PlayerController>();
         _capsuleCollider2D = GetComponent<CapsuleCollider2D>();
+        _enemyAudioController = GetComponentInChildren<EnemyAudioController>();
     }
 
     // Update is called once per frame
@@ -133,6 +135,7 @@ public class BanditController : EnemyMob
     public override void TakeDamage(float damage)
     {
         _animator.SetTrigger("takeHit");
+        _enemyAudioController.PlayTakeDamageAudio();
         Health -= damage;
     }
 
@@ -209,6 +212,7 @@ public class BanditController : EnemyMob
             {
                 _attackTracking.Attack();
                 _animator.SetTrigger("attack1");
+                _enemyAudioController.PlayAttackAudio();
                 _timer = 0;
             }
         }

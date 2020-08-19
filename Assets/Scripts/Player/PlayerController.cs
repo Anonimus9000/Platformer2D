@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
+    private PlayerAudioController _playerAudioController;
     private float _timer = 0;
     private bool _isDead = false;
     private bool _isFight = false;
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _playerAudioController = GetComponentInChildren<PlayerAudioController>();
     }
 
     // Update is called once per frame
@@ -62,6 +64,7 @@ public class PlayerController : MonoBehaviour
 public void TakeDamage(float damage)
     {
         _animator.SetTrigger("takeHit");
+        _playerAudioController.PlayTakeDamageAudio();
         Health -= damage;
     }
 
@@ -151,6 +154,7 @@ public void TakeDamage(float damage)
             {
                 _attackTracking.Attack();
                 _animator.SetTrigger("attack1");
+                _playerAudioController.PlayAttackAudio();
                 CorrectQueueComboAttacks();
                 return;
             }
@@ -159,6 +163,7 @@ public void TakeDamage(float damage)
             {
                 _attackTracking.Attack();
                 _animator.SetTrigger("attack2");
+                _playerAudioController.PlayAttackAudio();
                 CorrectQueueComboAttacks();
                 _timer = 0;
                 return;
