@@ -10,5 +10,9 @@ namespace Assets.Scripts.Interfaces
     {
         void TakeDamage(float damage);
 
+        void StartPause();
+        
+        void StopPause();
+
     }
 }

@@ -24,6 +24,19 @@ public abstract class AbstructBoss : MonoBehaviour, IEnemy
         Health -= damage;
     }
 
+    public virtual void StartPause()
+    {
+        StartStand();
+        StopFight();
+    }
+
+    public void StopPause()
+    {
+        StopStand();
+        StartFight();
+    }
+
+
     public virtual void Kill()
     {
         Destroy(gameObject);

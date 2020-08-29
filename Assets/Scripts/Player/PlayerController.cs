@@ -49,7 +49,6 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         _animator.SetFloat("speed", Mathf.Abs(_rigidbody2D.velocity.x));
-        print("Player is fight = " + _isFight);
         if (!_isDead && MoveSpeed > 0)
             Move();
     }

@@ -18,11 +18,6 @@ public abstract class EnemyMob : MonoBehaviour, IEnemy
         _StartMoveSpeed = MoveSpeed;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
     public abstract void MoveToPosition(Vector3 position);
     public abstract void MoveToPosition(float xPosition);
     public abstract void LookRight();
@@ -34,6 +29,18 @@ public abstract class EnemyMob : MonoBehaviour, IEnemy
     public virtual void Kill()
     {
         Destroy(gameObject);
+    }
+
+    public void StartPause()
+    {
+        StartStand();
+        StopFight();
+    }
+
+    public void StopPause()
+    {
+        StopStand();
+        StartFight();
     }
 
     public virtual void Attack(PlayerController player)
