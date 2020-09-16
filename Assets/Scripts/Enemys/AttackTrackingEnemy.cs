@@ -42,7 +42,7 @@ public class AttackTrackingEnemy : MonoBehaviour
 
     public void Attack()
     {
-        if (_player != null)
+        if (_player != null && Enemy != null)
             _player.TakeDamage(Enemy.Damage);
     }
 }

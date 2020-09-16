@@ -2244,6 +2244,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnTrigger
       objectReference: {fileID: 0}
+    - target: {fileID: 4781168279807170382, guid: 3d80ea337d9e12944870acc97ca7022f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4781168280586624132, guid: 3d80ea337d9e12944870acc97ca7022f,
         type: 3}
       propertyPath: ObjectToSpawn
